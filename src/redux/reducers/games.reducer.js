@@ -1,0 +1,11 @@
+  // Used to store gamess returned from the server
+const gamesReducer = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_GAMES':
+            return action.payload;
+        default:
+            return state;
+    }
+}
+  
+  export default gamesReducer; 

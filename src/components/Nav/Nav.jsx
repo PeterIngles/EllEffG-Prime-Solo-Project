@@ -62,7 +62,7 @@ function Nav() {
                     </MenuItem>
                   )}
                   {user.id && (
-                    <>
+                    <div>
                       <MenuItem onClick={handleClose}>
                         <Link className="navLink" to="/user">Home</Link>
                       </MenuItem>
@@ -72,7 +72,7 @@ function Nav() {
                       <MenuItem onClick={handleClose}>
                         <LogOutButton className="navLink" />
                       </MenuItem>
-                    </>
+                    </div>
                   )}
                 </Menu>
                 <MenuIcon />

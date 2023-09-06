@@ -21,6 +21,7 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 
 import './App.css';
+import CreateGroupPage from '../CreateGroupPage/CreateGroupPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -58,6 +59,13 @@ function App() {
             path="/user"
           >
             <UserPage />
+          </ProtectedRoute>
+          <ProtectedRoute
+            // logged in shows CreateGroupPage else shows LoginPage
+            exact
+            path="/creategroup"
+          >
+            <CreateGroupPage />
           </ProtectedRoute>
 
           <ProtectedRoute

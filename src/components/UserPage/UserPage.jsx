@@ -24,6 +24,10 @@ function UserPage() {
     dispatch({ type: 'FETCH_GROUPS', payload: user.id });
     console.log("store.group", group)
   }
+  
+  const createGroup = () => {
+    history.push('/creategroup')
+  }
 
   return (
     <div className="container">
@@ -52,7 +56,7 @@ function UserPage() {
       <nav aria-label="create options">
         <List>
         <ListItem disablePadding>
-            <ListItemButton>
+            <ListItemButton onClick={createGroup}>
               <ListItemIcon>
                 <GroupAddIcon />
               </ListItemIcon>
