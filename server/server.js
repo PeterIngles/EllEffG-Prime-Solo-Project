@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const groupsRouter = require('./routes/groups.router')
 const gamesRouter = require('./routes/games.router')
+const playersRouter = require('./routes/players.router')
 require('dotenv').config();
 
 const app = express();
@@ -27,6 +28,7 @@ app.use(passport.session());
 app.use('/api/user', userRouter);
 app.use('/api/groups', groupsRouter)
 app.use('/api/games', gamesRouter)
+app.use('/api/players', playersRouter)
 
 // Serve static files
 app.use(express.static('build'));

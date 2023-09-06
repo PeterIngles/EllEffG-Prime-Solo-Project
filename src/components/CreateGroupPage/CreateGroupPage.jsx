@@ -10,17 +10,19 @@ function CreateGroupPage() {
     const dispatch = useDispatch();
     const user = useSelector((store) => store.user);
     const games = useSelector((store) => store.games);
+    const players = useSelector((store) => store.players)
     const history = useHistory();
 
     const [selectGames, setSelectGames] = useState([]);
-      
-    const handleSelectionChange = (event, values) => {
-          setSelectGames(values);
-        };
 
-      useEffect(() => {
-        dispatch({ type: 'FETCH_GAMES'});
-        console.log("GAMES", games)
+    const handleSelectionChange = (event, values) => {
+        setSelectGames(values);
+    };
+
+    useEffect(() => {
+        dispatch({ type: 'FETCH_GAMES' });
+        dispatch({ type: 'FETCH_PLAYERS' })
+        console.log("GAMES and PLAYERS", games, players)
     }, []);
 
     return (
@@ -28,28 +30,45 @@ function CreateGroupPage() {
             <h1>CREATE GROUP PAGE</h1>
             <ul></ul>
             <TextField
-          required
-          id="filled-required"
-          label="Group Name"
-          placeholder="Group Name"
-          variant="filled"
-        />
-        <Autocomplete
-  multiple
-  value={selectGames}
-  onChange={handleSelectionChange}
-  options={games.map((game) => game.title)} // Map over the games array and extract the title property
-  renderInput={(params) => (
-    <TextField
-      {...params}
-      variant="standard"
-      label="Games"
-      placeholder=""
-    />
-  )}
-/>
-        
-        
+                required
+                id="filled-required"
+                label="Group Name"
+                placeholder="Group Name"
+                variant="filled"
+            />
+            <Autocomplete
+                multiple
+                value={selectGames}
+                onChange={handleSelectionChange}
+                options={games.map((game) => game.title)} // Map over the games array and extract the title property
+                renderInput={(params) => (
+                    <TextField
+                        {...params}
+                        variant="standard"
+                        label="Games"
+                        placeholder=""
+                    />
+                )}
+            />
+            <Autocomplete
+                freeSolo
+                id="search to add player"
+                disableClearable
+                options={players.map((option) => option.username)}
+                renderInput={(params) => (
+                    <TextField
+                        {...params}
+                        label="Search players"
+                        InputProps={{
+                            ...params.InputProps,
+                            type: 'search',
+                        }}
+                    />
+                )}
+            />
+
+
+
             <h2>Welcome, {user.username}!</h2>
             <p>Your ID is: {user.id}</p>
             <LogOutButton className="btn" />
