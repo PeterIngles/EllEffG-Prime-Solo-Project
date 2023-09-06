@@ -31,7 +31,7 @@ function UserPage() {
       <nav aria-label="user routes">
         <List>
           <ListItem disablePadding>
-            <ListItemButton onClick={()=>showGroups()}cl>
+          <ListItemButton onClick={showGroups}>
               <ListItemIcon >
                 <GroupsIcon />
               </ListItemIcon>
@@ -62,6 +62,12 @@ function UserPage() {
         </List>
       </nav>
     </Box>
+    {group.map((group, index) => (
+  <div key={index}>
+    <h1>{group.group_name}</h1>
+  </div>
+))}
+
     
       <h2>Welcome, {user.username}!</h2>
       <p>Your ID is: {user.id}</p>
