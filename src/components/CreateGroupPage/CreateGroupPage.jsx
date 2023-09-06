@@ -43,13 +43,17 @@ function CreateGroupPage() {
                 multiple
                 value={selectGames}
                 onChange={handleSelectionChange}
-                options={games.map((game) => game.title)} // Map over the games array and extract the title property
+                id="search to add player"
+                disableClearable
+                options={games.map((option) => option.title)}
                 renderInput={(params) => (
                     <TextField
                         {...params}
-                        variant="standard"
-                        label="Games"
-                        placeholder=""
+                        label="Search games"
+                        InputProps={{
+                            ...params.InputProps,
+                            type: 'search',
+                        }}
                     />
                 )}
             />
@@ -72,9 +76,6 @@ function CreateGroupPage() {
                 )}
             />
             <PersonAddIcon />
-
-
-
             <h2>Welcome, {user.username}!</h2>
             <p>Your ID is: {user.id}</p>
             <LogOutButton className="btn" />
