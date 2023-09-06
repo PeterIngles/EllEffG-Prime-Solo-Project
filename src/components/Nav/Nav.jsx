@@ -10,67 +10,88 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 
 function Nav() {
   const user = useSelector((store) => store.user);
 
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    // Toggle the menu open/close by setting anchorEl to null if it's already open, or to event.currentTarget if it's closed
+    setAnchorEl((prevAnchorEl) => (prevAnchorEl ? null : event.currentTarget));
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <>
-      <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static">
-          <Toolbar>
-            <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              aria-label="menu"
-              sx={{ mr: 2 }}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              News
-            </Typography>
-            <Button color="inherit">Login</Button>
-          </Toolbar>
-        </AppBar>
-      </Box>
       <div className="nav">
-        <Link to="/home">
-          <h2 className="nav-title">Prime Solo Project</h2>
-        </Link>
-        <div>
-          {/* If no user is logged in, show these links */}
-          {!user.id && (
-            // If there's no user, show login/registration links
-            <Link className="navLink" to="/login">
-              Login / Register
-            </Link>
-          )}
-
-          {/* If a user is logged in, show these links */}
-          {user.id && (
-            <>
-              <Link className="navLink" to="/user">
-                Home
+        <Box sx={{ flexGrow: 1 }}>
+          <AppBar position="static">
+            <Toolbar>
+              <IconButton
+                size="large"
+                edge="start"
+                color="inherit"
+                aria-label="menu"
+                sx={{ mr: 2 }}
+                id="basic-button"
+                aria-controls={open ? 'basic-menu' : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? 'true' : undefined}
+                onClick={handleClick}
+              >
+                <Menu
+                  id="basic-menu"
+                  anchorEl={anchorEl}
+                  open={open}
+                  onClose={handleClose}
+                  MenuListProps={{
+                    'aria-labelledby': 'basic-button',
+                  }}
+                >
+                  {/* If no user is logged in, show these links */}
+                  {!user.id && (
+                    <MenuItem onClick={handleClose}>
+                      <Link className="navLink" to="/login">
+                        <Button color="inherit">Login / Register</Button>
+                      </Link>
+                    </MenuItem>
+                  )}
+                  {user.id && (
+                    <>
+                      <MenuItem onClick={handleClose}>
+                        <Link className="navLink" to="/user">Home</Link>
+                      </MenuItem>
+                      <MenuItem onClick={handleClose}>
+                        <Link className="navLink" to="/info">Info Page</Link>
+                      </MenuItem>
+                      <MenuItem onClick={handleClose}>
+                        <LogOutButton className="navLink" />
+                      </MenuItem>
+                    </>
+                  )}
+                </Menu>
+                <MenuIcon />
+              </IconButton>
+              <Link to="/home">
+                <Typography variant="h6" component="div" className="nav-title" sx={{ flexGrow: 1 }}>
+                  eLL-eFF-G
+                </Typography>
               </Link>
 
-              <Link className="navLink" to="/info">
-                Info Page
+              <Link className="navLink" to="/about">
+                About
               </Link>
-
-              <LogOutButton className="navLink" />
-            </>
-          )}
-
-          <Link className="navLink" to="/about">
-            About
-          </Link>
-        </div>
+            </Toolbar>
+          </AppBar>
+        </Box>
       </div>
     </>
   );
 }
-
 
 export default Nav;
