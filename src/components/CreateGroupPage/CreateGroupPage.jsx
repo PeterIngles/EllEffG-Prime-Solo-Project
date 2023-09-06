@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom'
 import { TextField, Autocomplete } from '@mui/material';
 import { useEffect, useState } from 'react';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
 
 function CreateGroupPage() {
 
@@ -14,9 +15,11 @@ function CreateGroupPage() {
     const history = useHistory();
 
     const [selectGames, setSelectGames] = useState([]);
+    const [selectPlayers, setSelectPlayers] = useState([]);
 
     const handleSelectionChange = (event, values) => {
-        setSelectGames(values);
+        setSelectGames(values)
+        setSelectPlayers(values);
     };
 
     useEffect(() => {
@@ -51,7 +54,9 @@ function CreateGroupPage() {
                 )}
             />
             <Autocomplete
-                freeSolo
+                multiple
+                value={selectPlayers}
+                onChange={handleSelectionChange}
                 id="search to add player"
                 disableClearable
                 options={players.map((option) => option.username)}
@@ -66,6 +71,7 @@ function CreateGroupPage() {
                     />
                 )}
             />
+            <PersonAddIcon />
 
 
 
