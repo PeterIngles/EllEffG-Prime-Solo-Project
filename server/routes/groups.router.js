@@ -1,13 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool')
-const { useSelector } = require('react-redux');
 
 router.get('/', (req, res) => {
-  const user = useSelector((store) => store.user);
-  const { id } = user.id;
-  console.log("INSIDE get /group", id)
-  const queryParams = [id]
+  console.log("REQ", req.query[0])
+  const userid = req.query[0]; // access the id from the request body
+  console.log("INSIDE get /groups", userid);
+  const queryParams = [userid];
   const query = `SELECT "groups".*
   FROM "groups"
   JOIN "user_groups" ON "groups"."id" = "user_groups"."group_id"
@@ -17,7 +16,7 @@ router.get('/', (req, res) => {
       res.send(result.rows);
     })
     .catch(err => {
-      console.log('ERROR: Get all movies', err);
+      console.log('ERROR: Get all groups', err);
       res.sendStatus(500)
     })
 

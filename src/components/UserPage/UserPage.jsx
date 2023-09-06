@@ -1,6 +1,6 @@
 import React from 'react';
 import LogOutButton from '../LogOutButton/LogOutButton';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -11,18 +11,28 @@ import Divider from '@mui/material/Divider';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import GroupsIcon from '@mui/icons-material/Groups';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
+import { useHistory } from 'react-router-dom'
 
 function UserPage() {
-  // this component doesn't do much to start, just renders some user reducer info to the DOM
+
+  const dispatch = useDispatch();
   const user = useSelector((store) => store.user);
+  const group = useSelector((store) => store.group);
+  const history = useHistory();
+
+  const showGroups = () => {
+    dispatch({ type: 'FETCH_GROUPS', payload: user.id });
+    console.log("store.group", group)
+  }
+
   return (
     <div className="container">
     <Box sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-      <nav aria-label="main mailbox folders">
+      <nav aria-label="user routes">
         <List>
           <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
+            <ListItemButton onClick={()=>showGroups()}cl>
+              <ListItemIcon >
                 <GroupsIcon />
               </ListItemIcon>
               <ListItemText primary="My Groups" />
@@ -39,7 +49,7 @@ function UserPage() {
         </List>
       </nav>
       <Divider />
-      <nav aria-label="secondary mailbox folders">
+      <nav aria-label="create options">
         <List>
         <ListItem disablePadding>
             <ListItemButton>
