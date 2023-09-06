@@ -11,10 +11,16 @@ function* fetchUserGroups(action) {
       console.log('get all groups error');
     }
   }
+
+  function* postGroup(action){
+    console.log('Inside postGroup SAGA, action.payload=', action.payload)
+    yield axios.post('/api/groups', action.payload)
+}
   
 
 function* groupsSaga() {
     yield takeLatest('FETCH_GROUPS', fetchUserGroups);
+    yield takeLatest('ADD_GROUP', postGroup)
   }
 
 

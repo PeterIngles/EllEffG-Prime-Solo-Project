@@ -2,25 +2,48 @@ import React from 'react';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom'
-import { TextField, Autocomplete } from '@mui/material';
+import { TextField, Autocomplete, Button } from '@mui/material';
 import { useEffect, useState } from 'react';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
-import { SearchPlayers } from './SearchPlayers';
+import { SearchPlayers } from './SearchPlayers'
+import GroupAddIcon from '@mui/icons-material/GroupAdd';
 
 function CreateGroupPage() {
 
     const dispatch = useDispatch();
     const user = useSelector((store) => store.user);
     const games = useSelector((store) => store.games);
-    
+
     const history = useHistory();
 
+    const [groupName, setGroupName] = useState('');
     const [selectGames, setSelectGames] = useState([]);
-    
+    const [selectedPlayers, setSelectedPlayers] = useState([]);
+
 
     const handleSelectionChange = (event, values) => {
         setSelectGames(values)
     };
+
+    const handleGroupNameChange = (event) => {
+        setGroupName(event.target.value);
+    };
+
+    const handlePlayersChange = (selectedPlayers) => {
+        setSelectedPlayers(selectedPlayers);
+    };
+
+    const postGroup = () => {
+        console.log("clicked on AddGroup")
+        dispatch({
+            type: 'ADD_GROUP', payload: {
+                groupName: groupName,
+                selectGames: selectGames,
+                selectedPlayers: selectedPlayers
+            }
+        }
+        )
+    }
 
     useEffect(() => {
         dispatch({ type: 'FETCH_GAMES' });
@@ -33,6 +56,8 @@ function CreateGroupPage() {
             <h1>CREATE GROUP PAGE</h1>
             <ul></ul>
             <TextField
+                onChange={handleGroupNameChange}
+                value={groupName}
                 required
                 id="filled-required"
                 label="Group Name"
@@ -45,7 +70,8 @@ function CreateGroupPage() {
                 onChange={handleSelectionChange}
                 id="search to add player"
                 disableClearable
-                options={games.map((option) => option.title)}
+                options={games.map((option) => ({ value: option.id, label: option.title }))}
+                getOptionLabel={(option) => option.label}
                 renderInput={(params) => (
                     <TextField
                         {...params}
@@ -57,8 +83,12 @@ function CreateGroupPage() {
                     />
                 )}
             />
-            <SearchPlayers/>
+            <SearchPlayers onPlayersChange={handlePlayersChange} />
+
             <PersonAddIcon />
+            <Button onClick={postGroup} variant="contained" endIcon={<GroupAddIcon />}>
+                ADD GROUP
+            </Button>
             <h2>Welcome, {user.username}!</h2>
             <p>Your ID is: {user.id}</p>
             <LogOutButton className="btn" />

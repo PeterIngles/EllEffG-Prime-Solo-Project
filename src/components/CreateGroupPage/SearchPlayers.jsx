@@ -3,14 +3,15 @@ import { TextField, Autocomplete } from '@mui/material';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 
-export function SearchPlayers() {
+export function SearchPlayers({ onPlayersChange }) {
     
     const [selectPlayers, setSelectPlayers] = useState([]);
     const players = useSelector((store) => store.players)
 
     const handleSelectionChange = (event, values) => {
         setSelectPlayers(values);
-    };
+        onPlayersChange(values);
+      };
 
 
     return <Autocomplete
@@ -19,7 +20,8 @@ export function SearchPlayers() {
         onChange={handleSelectionChange}
         id="search to add player"
         disableClearable
-        options={players.map((option) => option.username)}
+        options={players.map((option) => ({ value: option.id, label: option.username }))}
+                getOptionLabel={(option) => option.label}
         renderInput={(params) => (
             <TextField
                 {...params}

@@ -22,11 +22,14 @@ router.get('/', (req, res) => {
 
 // add a new group
 router.post('/', (req, res) => {
-  console.log("Inside POST /groups, req.body is", req.body)
-  const { groupName, gameIds, userIds } = req.body;
+  console.log("Inside POST /groups")
+  const groupName = req.body.groupName
+  const gameIds = req.body.selectGames.map(game => game.value)
+  const userIds = req.body.selectedPlayers.map(players => players.value)
+
+  console.log("gameIds=", gameIds, "userIds=", userIds)
 
   const queryText = `
-
   WITH new_group AS (
     INSERT INTO "groups" ("group_name")
     VALUES (\$1)
@@ -40,16 +43,17 @@ router.post('/', (req, res) => {
   INSERT INTO "user_groups" ("user_id", "group_id")
   SELECT unnest(\$3::integer[]) AS user_id, new_group.id
   FROM new_group;
- 
-  `
-  pool.query(queryText, [groupName, gameIds, userIds])
-      .then((result) => {
-        res.sendStatus(201);
-      })
-      .catch((error) => {
-        res.sendStatus(500);
-        console.log("HERE", req.body)
-      })
+`;
+  const queryParams = [groupName, gameIds, userIds]
+  console.log("QueryParams=", queryParams)
+  pool.query(queryText, queryParams)
+    .then((result) => {
+      res.sendStatus(201);
+    })
+    .catch((error) => {
+      res.sendStatus(500);
+      console.log("ERROR on POST newGroup", req.body)
+    })
 });
 
 module.exports = router;
