@@ -6,7 +6,9 @@ body,
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: white;
   margin: 0px;
+  background-color: rgb(39, 39, 42);
 }
 
 img {
@@ -67,7 +69,7 @@ Button
   border-radius: 0;
   background: none;
   font: inherit;
-  color: #444;
+  color: #ffffff;
 }
 
 .btn_asLink:hover {
