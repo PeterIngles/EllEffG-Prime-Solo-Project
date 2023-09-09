@@ -29,6 +29,10 @@ export function SearchPlayers({ onPlayersChange }) {
                 InputProps={{
                     ...params.InputProps,
                     type: 'search',
-                }} />
+                }} 
+                sx={{
+                    '.MuiFormLabel-root': { color: '#ffffff' },
+                    '.MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': { borderColor: '#ffffff' },
+                }}/>
         )} />;
 }

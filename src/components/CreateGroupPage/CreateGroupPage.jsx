@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import { SearchPlayers } from './SearchPlayers'
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 function CreateGroupPage() {
 
@@ -19,6 +20,14 @@ function CreateGroupPage() {
     const [groupName, setGroupName] = useState('');
     const [selectGames, setSelectGames] = useState([]);
     const [selectedPlayers, setSelectedPlayers] = useState([]);
+
+    const theme = createTheme({
+        palette: {
+          primary: {
+            main: '#ffffff',  // white color
+          },
+        },
+      });
 
 
     const handleSelectionChange = (event, values) => {
@@ -52,7 +61,7 @@ function CreateGroupPage() {
     }, []);
 
     return (
-        <div>
+        <div id="create-group-form">
             <h1>CREATE GROUP PAGE</h1>
             <ul></ul>
             <TextField
@@ -63,6 +72,10 @@ function CreateGroupPage() {
                 label="Group Name"
                 placeholder="Group Name"
                 variant="filled"
+                sx={{
+                    '.MuiFormLabel-root': { color: '#ffffff' },
+                    '.MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': { borderColor: '#ffffff' },
+                }}
             />
             <Autocomplete
                 multiple
@@ -80,10 +93,16 @@ function CreateGroupPage() {
                             ...params.InputProps,
                             type: 'search',
                         }}
+                        sx={{
+                            '.MuiFormLabel-root': { color: '#ffffff' },
+                            '.MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': { borderColor: '#ffffff' },
+                        }}
+            
                     />
                 )}
             />
-            <SearchPlayers onPlayersChange={handlePlayersChange} />
+            <SearchPlayers onPlayersChange={handlePlayersChange} 
+            />
 
             <PersonAddIcon />
             <Button onClick={postGroup} variant="contained" endIcon={<GroupAddIcon />}>

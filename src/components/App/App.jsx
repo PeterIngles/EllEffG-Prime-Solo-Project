@@ -6,6 +6,8 @@ import {
   Switch,
 } from 'react-router-dom';
 
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
 import { useDispatch, useSelector } from 'react-redux';
 
 import Nav from '../Nav/Nav';
@@ -24,6 +26,25 @@ import './App.css';
 import CreateGroupPage from '../CreateGroupPage/CreateGroupPage';
 
 function App() {
+  const theme = createTheme({
+    components: {
+      MuiSvgIcon: {
+        styleOverrides: {
+          root: {
+            color: 'white', // Change this to your desired color
+          },
+        },
+      },
+      MuiList: {
+        styleOverrides: {
+          root: {
+            backgroundColor: 'rgb(54,54,58)', // Change this to your desired color
+          },
+        },
+      },
+    },
+  });
+
   const dispatch = useDispatch();
 
   const user = useSelector(store => store.user);
@@ -34,6 +55,7 @@ function App() {
 
   return (
     <Router>
+      <ThemeProvider theme={theme}>
       <div>
         <Nav />
         <Switch>
@@ -125,6 +147,7 @@ function App() {
         </Switch>
         <Footer />
       </div>
+      </ThemeProvider>
     </Router>
   );
 }
