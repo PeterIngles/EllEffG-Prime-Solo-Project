@@ -24,19 +24,19 @@ function UserPage() {
   const history = useHistory();
 
 console.log("The group is", group)
-let { id } = useParams();
-id = Number(id)
+console.log("The game is", games)
+
+let { groupId, gameId } = useParams();
+
+console.log("GroupId is", groupId, "gameId is", gameId)
+
+const userId= user.id
+
 
 useEffect(() => {
-    console.log("Group ID is", id)
     console.log("Games=", games)
-    dispatch({ type: 'FETCH_USER_GAMES', payload: id });
-}, [id]);
-
-const toGameSchedule = (groupId, gameId) => {
-    console.log("clicked on", id)
-    history.push(`/gameschedule/${groupId}/${gameId}`)
-}
+    dispatch({ type: 'FETCH_USER_GAMES', payload: userId });
+}, []);
 
   return (
     <div id="user-sidebar" className="container">
@@ -48,7 +48,8 @@ const toGameSchedule = (groupId, gameId) => {
               <ListItemIcon >
                 <GroupsIcon />
               </ListItemIcon>
-              <ListItemText primary={group.find(group => group.id === id)?.group_name || 'Not found'} />
+              <ListItemText primary={group.find(group => group.id == groupId)?.group_name || 'Not found'} />
+
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
@@ -76,12 +77,10 @@ const toGameSchedule = (groupId, gameId) => {
       </nav>
     </Box>
     <div id="user-groups">
-   
- 
 </div>
 <div>
     {games.map((game) => (
-      <div key={game.id} onClick={() => toGameSchedule(id, game.id)}>
+      <div key={game.id}>
         <h2>{game.title}</h2>
         <img src={game.icon} alt={game.title} style={{ width: '5%', height: 'auto' }}/>
         <p>Reset Time: {game.reset}</p>
