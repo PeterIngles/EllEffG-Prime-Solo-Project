@@ -28,8 +28,23 @@ import Paper from '@mui/material/Paper';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { useTheme } from '@mui/material/styles';
+import Button from '@mui/material/Button';
+import Modal from '@mui/material/Modal';
+import { styled } from '@mui/material/styles';
 
 function UserPage() {
+
+    const style = {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: 400,
+        bgcolor: 'rgb(54,54,58)',
+        border: '2px solid #000',
+        boxShadow: 24,
+        p: 4,
+      };
 
   const dispatch = useDispatch();
   const theme = useTheme();
@@ -49,7 +64,9 @@ const userId= user.id
 const game = games.find((game) => game.id == gameId);
 const gameTitle = game ? game.title : 'Not found';
 const gameIcon = game ? game.icon : 'Not found';
-
+const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
 useEffect(() => {
     console.log("Games=", games)
@@ -82,6 +99,20 @@ function createData(name, calories, fat, carbs, protein, price) {
   function Row(props) {
     const { row } = props;
     const [open, setOpen] = React.useState(false);
+
+    const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: '',
+  border: '2px solid #000',
+  boxShadow: 25,
+  p: 4,
+};
+
+
   
     return (
       <React.Fragment>
@@ -205,15 +236,15 @@ function createData(name, calories, fat, carbs, protein, price) {
 </div>
 
 
-  <div><h2>{game.title}</h2>
-        <img src={game.icon} alt={game.title} style={{ width: '5%', height: 'auto' }}/>
-        <p>Reset Time: {game.reset}</p></div>
+  
 
         <TableContainer component={Paper} style={{ backgroundColor: theme.palette.background.default }}>
       <Table aria-label="collapsible table">
         <TableHead>
           <TableRow>
-            <TableCell />
+           <TableCell><div><h2>{game.title}</h2>
+        <img src={game.icon} alt={game.title} style={{ width: '5%', height: 'auto' }}/>
+        <p>Reset Time: {game.reset}</p></div></TableCell>
             <TableCell>Day</TableCell>
             <TableCell align="right">Activty 1</TableCell>
             <TableCell align="right">Activity 2</TableCell>
@@ -221,10 +252,36 @@ function createData(name, calories, fat, carbs, protein, price) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <Row key={row.name} row={row} />
-          ))}
-        </TableBody>
+  {rows.map((row) => (
+    <React.Fragment key={row.name}>
+      <Row row={row} />
+      <div>
+        <Button onClick={handleOpen}>Open modal</Button>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+          BackdropProps={{
+            // Additional backdrop props can be provided here
+            timeout: 500, // Adjust the transition duration of the backdrop here
+            style: { opacity: 0.5 }, // Adjust the opacity of the backdrop here
+          }}
+        >
+          <Box sx={style}>
+            <Typography id="modal-modal-title" variant="h6" component="h2">
+              Text in a modal
+            </Typography>
+            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+              Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+            </Typography>
+          </Box>
+        </Modal>
+      </div>
+    </React.Fragment>
+  ))}
+</TableBody>
+
       </Table>
     </TableContainer>
 
