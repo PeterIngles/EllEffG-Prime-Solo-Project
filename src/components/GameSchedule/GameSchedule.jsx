@@ -31,11 +31,14 @@ let { groupId, gameId } = useParams();
 console.log("GroupId is", groupId, "gameId is", gameId)
 
 const userId= user.id
+const game = games.find((game) => game.id == gameId);
+const gameTitle = game ? game.title : 'Not found';
+const gameIcon = game ? game.icon : 'Not found';
 
 
 useEffect(() => {
     console.log("Games=", games)
-    dispatch({ type: 'FETCH_USER_GAMES', payload: userId });
+    dispatch({ type: 'FETCH_USER_GAMES', payload: groupId });
 }, []);
 
   return (
@@ -78,15 +81,11 @@ useEffect(() => {
     </Box>
     <div id="user-groups">
 </div>
-<div>
-    {games.map((game) => (
-      <div key={game.id}>
-        <h2>{game.title}</h2>
+
+
+  <div><h2>{game.title}</h2>
         <img src={game.icon} alt={game.title} style={{ width: '5%', height: 'auto' }}/>
-        <p>Reset Time: {game.reset}</p>
-      </div>
-    ))}
-  </div>
+        <p>Reset Time: {game.reset}</p></div>
 
     
       <h2>Welcome, {user.username}!</h2>
