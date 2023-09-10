@@ -24,6 +24,7 @@ function UserPage() {
   const dispatch = useDispatch();
   const user = useSelector((store) => store.user);
   const group = useSelector((store) => store.group);
+  const games = useSelector((store) => store.games)
   const history = useHistory();
 
 console.log("The group is", group)
@@ -32,6 +33,8 @@ id = Number(id)
 
 useEffect(() => {
     console.log("Group ID is", id)
+    console.log("Games=", games)
+    dispatch({ type: 'FETCH_USER_GAMES', payload: id });
 }, [id]);
 
   return (
@@ -73,9 +76,17 @@ useEffect(() => {
     </Box>
     <div id="user-groups">
    
-    <Button></Button>
  
 </div>
+<div>
+    {games.map((game) => (
+      <div key={game.id}>
+        <h2>{game.title}</h2>
+        <img src={game.icon} alt={game.title} style={{ width: '5%', height: 'auto' }}/>
+        <p>Reset Time: {game.reset}</p>
+      </div>
+    ))}
+  </div>
 
     
       <h2>Welcome, {user.username}!</h2>

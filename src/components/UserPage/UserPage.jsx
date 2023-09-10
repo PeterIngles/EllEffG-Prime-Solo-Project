@@ -159,7 +159,7 @@ function UserPage() {
           focusRipple
           key={images.title}
           style={{
-            width: images.width,
+            width: images.width       ,
           }}
         >
           <ImageSrc style={{ backgroundImage: `url(${images.url})` }} />

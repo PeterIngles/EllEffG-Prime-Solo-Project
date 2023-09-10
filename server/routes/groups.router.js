@@ -2,9 +2,9 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool')
 
-router.get('/', (req, res) => {
+router.get('/:id', (req, res) => {
   const userid = req.query[0]; // access the id from the request body
-  console.log("Inside GET /groups", userid);
+  console.log("Inside GET /groups/id", userid);
   const queryParams = [userid];
   const query = `SELECT "groups".*
   FROM "groups"
@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
       res.send(result.rows);
     })
     .catch(err => {
-      console.log('ERROR: Get all groups', err);
+      console.log('ERROR: Get all user groups', err);
       res.sendStatus(500)
     })
 });
