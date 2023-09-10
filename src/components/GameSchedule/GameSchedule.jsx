@@ -27,10 +27,12 @@ import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import { useTheme } from '@mui/material/styles';
 
 function UserPage() {
 
   const dispatch = useDispatch();
+  const theme = useTheme();
   const user = useSelector((store) => store.user);
   const group = useSelector((store) => store.group);
   const games = useSelector((store) => store.games)
@@ -207,7 +209,7 @@ function createData(name, calories, fat, carbs, protein, price) {
         <img src={game.icon} alt={game.title} style={{ width: '5%', height: 'auto' }}/>
         <p>Reset Time: {game.reset}</p></div>
 
-        <TableContainer component={Paper}>
+        <TableContainer component={Paper} style={{ backgroundColor: theme.palette.background.default }}>
       <Table aria-label="collapsible table">
         <TableHead>
           <TableRow>

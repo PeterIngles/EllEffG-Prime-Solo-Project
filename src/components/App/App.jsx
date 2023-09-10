@@ -30,6 +30,22 @@ import CreateGroupPage from '../CreateGroupPage/CreateGroupPage';
 function App() {
   const theme = createTheme({
     components: {
+      MuiTable: {
+        styleOverrides: {
+          root: {
+            color: 'white',
+            backgroundColor: 'rgb(54,54,58)', // Change this to your desired color
+            // Add any other table styles here
+          },
+        },
+      },
+      MuiTableCell: {
+        styleOverrides: {
+          root: {
+            color: 'white'
+          }
+        }
+      },
       MuiSvgIcon: {
         styleOverrides: {
           root: {
