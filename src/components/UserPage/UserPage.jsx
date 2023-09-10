@@ -105,6 +105,11 @@ function UserPage() {
     history.push('/creategroup')
   }
 
+  const toGroupId = (id) => {
+    console.log("group.id=", id)
+    history.push(`/group/${id}`)
+  }
+
   return (
     <div id="user-sidebar" className="container">
     <Box sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
@@ -150,6 +155,7 @@ function UserPage() {
   <div  key={index}>
 <Box sx={{ display: 'flex', flexWrap: 'wrap', minWidth: 300, width: '100%' }}>
         <ImageButton
+          onClick={() => toGroupId(group.id)}
           focusRipple
           key={images.title}
           style={{

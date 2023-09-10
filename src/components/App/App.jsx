@@ -21,6 +21,7 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import GroupPage from '../GroupPage/GroupPage'
 
 import './App.css';
 import CreateGroupPage from '../CreateGroupPage/CreateGroupPage';
@@ -138,6 +139,12 @@ function App() {
               // Otherwise, show the Landing page
               <LandingPage />
             }
+          </Route>
+          <Route
+          
+            path="/group/:id"
+            >
+            <GroupPage/>
           </Route>
 
           {/* If none of the other routes matched, we will show a 404. */}
