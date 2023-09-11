@@ -157,16 +157,16 @@ function App() {
                 <LandingPage />
               }
             </Route>
-            <Route
+            <ProtectedRoute
 
               path="/group/:id"
             >
               <GroupPage />
-            </Route>
+            </ProtectedRoute>
 
-            <Route path="/gameschedule/:groupId/:gameId">
+            <ProtectedRoute path="/gameschedule/:groupId/:gameId">
               <GameSchedule />
-            </Route>
+            </ProtectedRoute>
 
             {/* If none of the other routes matched, we will show a 404. */}
             <Route>

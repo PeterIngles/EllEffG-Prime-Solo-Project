@@ -31,6 +31,10 @@ import { useTheme } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import { styled } from '@mui/material/styles';
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 
 function UserPage() {
 
@@ -83,13 +87,17 @@ function UserPage() {
     const [open, setOpen] = React.useState(false);
   }
 
+  const backToGroup = () => {
+    history.push(`/group/${groupId}`)
+  }
+
   return (
     <div id="user-sidebar" className="container">
       <Box sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
         <nav aria-label="user routes">
           <List>
             <ListItem disablePadding>
-              <ListItemButton>
+              <ListItemButton onClick={backToGroup}>
                 <ListItemIcon >
                   <GroupsIcon />
                 </ListItemIcon>
@@ -138,6 +146,28 @@ function UserPage() {
           <TableBody>
           <TableRow>
   <TableCell>Tuesday</TableCell>
+  <TableCell>
+  <Button onClick={handleOpen}>sign Up</Button>
+<Modal
+  open={open}
+  onClose={handleClose}
+  aria-labelledby="tuesdaySignUp"
+  aria-describedby="modal-modal-description"
+>
+  <Box sx={style}>
+    <Typography id="tuesdaySignUp" variant="h6" component="h2">
+      Sign up for Tuesday?
+    </Typography>
+    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <DemoContainer components={['TimePicker']}>
+        <TimePicker label="Basic time picker" />
+      </DemoContainer>
+    </LocalizationProvider>
+    </Typography>
+  </Box>
+</Modal>
+  </TableCell>
   {responses.map((response) => {
     if (response.Date === "Tuesday") {
       return (

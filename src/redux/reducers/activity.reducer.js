@@ -10,4 +10,4 @@ const activityReducer = (state = [], action) => {
     }
 }
   
-  export default activityReducer; 
+  export default activityReducer;  
