@@ -26,10 +26,18 @@ import GameSchedule from '../GameSchedule/GameSchedule'
 
 import './App.css';
 import CreateGroupPage from '../CreateGroupPage/CreateGroupPage';
+import { withTheme } from '@emotion/react';
 
 function App() {
   const theme = createTheme({
     components: {
+      MuiTimePicker:{
+        styleOverrides: {
+          root: {
+            color: "white"
+          }
+        }
+      },
       MuiTable: {
         styleOverrides: {
           root: {

@@ -29,16 +29,17 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { useTheme } from '@mui/material/styles';
 import Button from '@mui/material/Button';
-import Modal from '@mui/material/Modal';
+import img from '@mui/material/Modal';
 import { styled } from '@mui/material/styles';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
+import ScheduleDayModal from './ScheduleDayModal';
 
 
 
-function UserPage() {
+function GameSchedule(date) {
 
   const style = {
     position: 'absolute',
@@ -63,6 +64,8 @@ function UserPage() {
   const history = useHistory();
 
   let { groupId, gameId } = useParams();
+
+  const dates = ["Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Monday"]
 
   console.log("GroupId is", groupId, "gameId is", gameId, "Response are", responses, "Activites are", activity)
 
@@ -143,7 +146,7 @@ function UserPage() {
           <TableBody>
             <TableRow>
               <TableCell>Tuesday</TableCell>
-              
+              <ScheduleDayModal id={dates[0]}/>
               {responses.map((response) => {
                 if (response.Date === "Tuesday") {
                   return (
@@ -161,26 +164,7 @@ function UserPage() {
 
             <TableRow >
               <TableCell>Wednesday</TableCell>
-              <TableCell>
-                <Button onClick={handleOpen}>sign Up</Button>
-                <Modal
-                  open={open}
-                  onClose={handleClose}
-                  aria-labelledby="wednesdaySignUp"
-                  aria-describedby="modal-modal-description"
-                >
-                  <Box sx={style}>
-                    <Typography id="wednesdaySignUp" variant="h6" component="h2">
-                      Sign up for Wednesday?
-                    </Typography>
-                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                      <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        <TimePicker label="Basic time picker" />
-                      </LocalizationProvider>
-                    </Typography>
-                  </Box>
-                </Modal>
-              </TableCell>
+              <ScheduleDayModal id={dates[1]}/>
               {responses.map((response) => {
                 if (response.Date === "Wednesday") {
                   return (
@@ -197,26 +181,7 @@ function UserPage() {
             </TableRow>
             <TableRow >
               <TableCell>Thursday</TableCell>
-              <TableCell>
-                <Button onClick={handleOpen}>sign Up</Button>
-                <Modal
-                  open={open}
-                  onClose={handleClose}
-                  aria-labelledby="ThursdaySignUp"
-                  aria-describedby="modal-modal-description"
-                >
-                  <Box sx={style}>
-                    <Typography id="ThursdaySignUp" variant="h6" component="h2">
-                      Sign up for Thursday?
-                    </Typography>
-                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                      <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        <TimePicker label="Basic time picker" />
-                      </LocalizationProvider>
-                    </Typography>
-                  </Box>
-                </Modal>
-              </TableCell>
+              <ScheduleDayModal id={dates[2]}/>
               {responses.map((response) => {
                 if (response.Date === "Thursday") {
                   return (
@@ -233,26 +198,7 @@ function UserPage() {
             </TableRow>
             <TableRow >
               <TableCell>Friday</TableCell>
-              <TableCell>
-                <Button onClick={handleOpen}>sign Up</Button>
-                <Modal
-                  open={open}
-                  onClose={handleClose}
-                  aria-labelledby="FridaySignUp"
-                  aria-describedby="modal-modal-description"
-                >
-                  <Box sx={style}>
-                    <Typography id="FridaySignUp" variant="h6" component="h2">
-                      Sign up for Friday?
-                    </Typography>
-                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                      <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        <TimePicker label="Basic time picker" />
-                      </LocalizationProvider>
-                    </Typography>
-                  </Box>
-                </Modal>
-              </TableCell>
+              <ScheduleDayModal id={dates[3]}/>
               {responses.map((response) => {
                 if (response.Date === "Friday") {
                   return (
@@ -269,26 +215,7 @@ function UserPage() {
             </TableRow>
             <TableRow >
               <TableCell>Saturday</TableCell>
-              <TableCell>
-                <Button onClick={handleOpen}>sign Up</Button>
-                <Modal
-                  open={open}
-                  onClose={handleClose}
-                  aria-labelledby="SundaySignUp"
-                  aria-describedby="modal-modal-description"
-                >
-                  <Box sx={style}>
-                    <Typography id="SundaySignUp" variant="h6" component="h2">
-                      Sign up for Sunday?
-                    </Typography>
-                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                      <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        <TimePicker label="Basic time picker" />
-                      </LocalizationProvider>
-                    </Typography>
-                  </Box>
-                </Modal>
-              </TableCell>
+              <ScheduleDayModal id={dates[4]}/>
               {responses.map((response) => {
                 if (response.Date === "Saturday") {
                   return (
@@ -305,26 +232,7 @@ function UserPage() {
             </TableRow>
             <TableRow >
               <TableCell>Sunday</TableCell>
-              <TableCell>
-                <Button onClick={handleOpen}>sign Up</Button>
-                <Modal
-                  open={open}
-                  onClose={handleClose}
-                  aria-labelledby="SundaySignUp"
-                  aria-describedby="modal-modal-description"
-                >
-                  <Box sx={style}>
-                    <Typography id="SundaySignUp" variant="h6" component="h2">
-                      Sign up for Sunday?
-                    </Typography>
-                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                      <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        <TimePicker label="Basic time picker" />
-                      </LocalizationProvider>
-                    </Typography>
-                  </Box>
-                </Modal>
-              </TableCell>
+              <ScheduleDayModal id={dates[5]}/>
               {responses.map((response) => {
                 if (response.Date === "Sunday") {
                   return (
@@ -341,26 +249,7 @@ function UserPage() {
             </TableRow>
             <TableRow >
               <TableCell>Monday</TableCell>
-              <TableCell>
-                <Button onClick={handleOpen}>sign Up</Button>
-                <Modal
-                  open={open}
-                  onClose={handleClose}
-                  aria-labelledby="MondaySignUp"
-                  aria-describedby="modal-modal-description"
-                >
-                  <Box sx={style}>
-                    <Typography id="MondaySignUp" variant="h6" component="h2">
-                      Sign up for Monday?
-                    </Typography>
-                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                      <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        <TimePicker label="Basic time picker" />
-                      </LocalizationProvider>
-                    </Typography>
-                  </Box>
-                </Modal>
-              </TableCell>
+              <ScheduleDayModal id={dates[6]}/>
               {responses.map((response) => {
                 if (response.Date === "Monday") {
                   return (
@@ -392,4 +281,4 @@ function UserPage() {
 }
 
 // this allows us to use <App /> in index.js
-export default UserPage;
+export default GameSchedule;

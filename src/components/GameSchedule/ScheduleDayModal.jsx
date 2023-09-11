@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Box from '@mui/material/Box';
 import { useHistory } from 'react-router-dom'
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Collapse from '@mui/material/Collapse';
@@ -25,8 +25,14 @@ import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
+import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 
-function ScheduleDayModal() {
+
+function ScheduleDayModal(props) {
+
+    const date  = props.id;
+
+    console.log("DAAAATE",props)
 
   const style = {
     position: 'absolute',
@@ -60,24 +66,33 @@ function ScheduleDayModal() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [selectedStartTime, setSelectedStartTime] = useState(null);
+  const [selectedEndTime, setSelectedEndTime] = useState(null);
+
 
   return (
     <div>
       <TableCell>
-        <Button onClick={handleOpen}>Sign Up</Button>
+      <Button onClick={handleOpen} variant="contained">Sign Up</Button>
         <Modal
           open={open}
           onClose={handleClose}
-          aria-labelledby="wednesdaySignUp"
+          aria-labelledby="SignUp"
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-            <Typography id="wednesdaySignUp" variant="h6" component="h2">
-              Sign up for Wednesday?
+            <Typography id="SignUp" variant="h6" component="h2">
+              Sign up for {date}?
             </Typography>
             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
               <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <TimePicker label="Basic time picker" />
+                <TimePicker label="Basic time picker" 
+                value={selectedStartTime}
+                onChange={setSelectedStartTime}/>
+                <TimePicker label="Basic time picker" 
+                value={selectedEndTime}
+                onChange={setSelectedEndTime}/>
+                <Button onClick={handleClose} variant="contained">SIGN UP<EventAvailableIcon/></Button>
               </LocalizationProvider>
             </Typography>
           </Box>
