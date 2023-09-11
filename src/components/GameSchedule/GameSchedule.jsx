@@ -36,6 +36,8 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 
+
+
 function UserPage() {
 
   const style = {
@@ -79,13 +81,8 @@ function UserPage() {
     console.log("Games=", games)
     dispatch({ type: 'FETCH_USER_GAMES', payload: groupId });
     dispatch({ type: 'FETCH_GROUP_RESPONSES', payload: { groupId: groupId, gameId: gameId } });
-    dispatch({ type: 'FETCH_ACTIVITY'})
+    dispatch({ type: 'FETCH_ACTIVITY' })
   }, []);
-
-  function Row(props) {
-    const { row } = props;
-    const [open, setOpen] = React.useState(false);
-  }
 
   const backToGroup = () => {
     history.push(`/group/${groupId}`)
@@ -138,147 +135,246 @@ function UserPage() {
               <TableCell><div><h2>{game.title}</h2>
                 <img src={game.icon} alt={game.title} style={{ width: '5%', height: 'auto' }} />
                 <p>Reset Time: {game.reset}</p></div></TableCell>
-                {activity.map((activity) => (
-              <TableCell key={activity.id} align="right">{activity.activity_name}</TableCell>
-             ))}
+              {activity.map((activity) => (
+                <TableCell key={activity.id} align="right">{activity.activity_name}</TableCell>
+              ))}
             </TableRow>
           </TableHead>
           <TableBody>
-          <TableRow>
-  <TableCell>Tuesday</TableCell>
-  <TableCell>
-  <Button onClick={handleOpen}>sign Up</Button>
-<Modal
-  open={open}
-  onClose={handleClose}
-  aria-labelledby="tuesdaySignUp"
-  aria-describedby="modal-modal-description"
->
-  <Box sx={style}>
-    <Typography id="tuesdaySignUp" variant="h6" component="h2">
-      Sign up for Tuesday?
-    </Typography>
-    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <DemoContainer components={['TimePicker']}>
-        <TimePicker label="Basic time picker" />
-      </DemoContainer>
-    </LocalizationProvider>
-    </Typography>
-  </Box>
-</Modal>
-  </TableCell>
-  {responses.map((response) => {
-    if (response.Date === "Tuesday") {
-      return (
-        <React.Fragment key={response.id}>
-          <TableCell component="th" scope="row"></TableCell>
-          <TableCell align="right">{response.username}</TableCell>
-          <TableCell align="right">{response.time_start}</TableCell>
-          <TableCell align="right">{response.time_end}</TableCell>
-        </React.Fragment>
-      );
-    }
-    return null; // Return null when the condition is not met
-  })}
-</TableRow>
+            <TableRow>
+              <TableCell>Tuesday</TableCell>
+              
+              {responses.map((response) => {
+                if (response.Date === "Tuesday") {
+                  return (
+                    <React.Fragment key={response.id}>
+                      <TableCell component="th" scope="row"></TableCell>
+                      <TableCell align="right">{response.username}</TableCell>
+                      <TableCell align="right">{response.time_start}</TableCell>
+                      <TableCell align="right">{response.time_end}</TableCell>
+                    </React.Fragment>
+                  );
+                }
+                return null; // Return null when the condition is not met
+              })}
+            </TableRow>
 
             <TableRow >
               <TableCell>Wednesday</TableCell>
+              <TableCell>
+                <Button onClick={handleOpen}>sign Up</Button>
+                <Modal
+                  open={open}
+                  onClose={handleClose}
+                  aria-labelledby="wednesdaySignUp"
+                  aria-describedby="modal-modal-description"
+                >
+                  <Box sx={style}>
+                    <Typography id="wednesdaySignUp" variant="h6" component="h2">
+                      Sign up for Wednesday?
+                    </Typography>
+                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                      <LocalizationProvider dateAdapter={AdapterDayjs}>
+                        <TimePicker label="Basic time picker" />
+                      </LocalizationProvider>
+                    </Typography>
+                  </Box>
+                </Modal>
+              </TableCell>
               {responses.map((response) => {
-    if (response.Date === "Wednesday") {
-      return (
-        <React.Fragment key={response.id}>
-          <TableCell component="th" scope="row"></TableCell>
-          <TableCell align="right">{response.username}</TableCell>
-          <TableCell align="right">{response.time_start}</TableCell>
-          <TableCell align="right">{response.time_end}</TableCell>
-        </React.Fragment>
-      );
-    }
-    return null; // Return null when the condition is not met
-  })}
+                if (response.Date === "Wednesday") {
+                  return (
+                    <React.Fragment key={response.id}>
+                      <TableCell component="th" scope="row"></TableCell>
+                      <TableCell align="right">{response.username}</TableCell>
+                      <TableCell align="right">{response.time_start}</TableCell>
+                      <TableCell align="right">{response.time_end}</TableCell>
+                    </React.Fragment>
+                  );
+                }
+                return null; // Return null when the condition is not met
+              })}
             </TableRow>
             <TableRow >
               <TableCell>Thursday</TableCell>
+              <TableCell>
+                <Button onClick={handleOpen}>sign Up</Button>
+                <Modal
+                  open={open}
+                  onClose={handleClose}
+                  aria-labelledby="ThursdaySignUp"
+                  aria-describedby="modal-modal-description"
+                >
+                  <Box sx={style}>
+                    <Typography id="ThursdaySignUp" variant="h6" component="h2">
+                      Sign up for Thursday?
+                    </Typography>
+                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                      <LocalizationProvider dateAdapter={AdapterDayjs}>
+                        <TimePicker label="Basic time picker" />
+                      </LocalizationProvider>
+                    </Typography>
+                  </Box>
+                </Modal>
+              </TableCell>
               {responses.map((response) => {
-    if (response.Date === "Thursday") {
-      return (
-        <React.Fragment key={response.id}>
-          <TableCell component="th" scope="row"></TableCell>
-          <TableCell align="right">{response.username}</TableCell>
-          <TableCell align="right">{response.time_start}</TableCell>
-          <TableCell align="right">{response.time_end}</TableCell>
-        </React.Fragment>
-      );
-    }
-    return null; // Return null when the condition is not met
-  })}
+                if (response.Date === "Thursday") {
+                  return (
+                    <React.Fragment key={response.id}>
+                      <TableCell component="th" scope="row"></TableCell>
+                      <TableCell align="right">{response.username}</TableCell>
+                      <TableCell align="right">{response.time_start}</TableCell>
+                      <TableCell align="right">{response.time_end}</TableCell>
+                    </React.Fragment>
+                  );
+                }
+                return null; // Return null when the condition is not met
+              })}
             </TableRow>
             <TableRow >
               <TableCell>Friday</TableCell>
+              <TableCell>
+                <Button onClick={handleOpen}>sign Up</Button>
+                <Modal
+                  open={open}
+                  onClose={handleClose}
+                  aria-labelledby="FridaySignUp"
+                  aria-describedby="modal-modal-description"
+                >
+                  <Box sx={style}>
+                    <Typography id="FridaySignUp" variant="h6" component="h2">
+                      Sign up for Friday?
+                    </Typography>
+                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                      <LocalizationProvider dateAdapter={AdapterDayjs}>
+                        <TimePicker label="Basic time picker" />
+                      </LocalizationProvider>
+                    </Typography>
+                  </Box>
+                </Modal>
+              </TableCell>
               {responses.map((response) => {
-    if (response.Date === "Friday") {
-      return (
-        <React.Fragment key={response.id}>
-          <TableCell component="th" scope="row"></TableCell>
-          <TableCell align="right">{response.username}</TableCell>
-          <TableCell align="right">{response.time_start}</TableCell>
-          <TableCell align="right">{response.time_end}</TableCell>
-        </React.Fragment>
-      );
-    }
-    return null; // Return null when the condition is not met
-  })}
+                if (response.Date === "Friday") {
+                  return (
+                    <React.Fragment key={response.id}>
+                      <TableCell component="th" scope="row"></TableCell>
+                      <TableCell align="right">{response.username}</TableCell>
+                      <TableCell align="right">{response.time_start}</TableCell>
+                      <TableCell align="right">{response.time_end}</TableCell>
+                    </React.Fragment>
+                  );
+                }
+                return null; // Return null when the condition is not met
+              })}
             </TableRow>
             <TableRow >
               <TableCell>Saturday</TableCell>
+              <TableCell>
+                <Button onClick={handleOpen}>sign Up</Button>
+                <Modal
+                  open={open}
+                  onClose={handleClose}
+                  aria-labelledby="SundaySignUp"
+                  aria-describedby="modal-modal-description"
+                >
+                  <Box sx={style}>
+                    <Typography id="SundaySignUp" variant="h6" component="h2">
+                      Sign up for Sunday?
+                    </Typography>
+                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                      <LocalizationProvider dateAdapter={AdapterDayjs}>
+                        <TimePicker label="Basic time picker" />
+                      </LocalizationProvider>
+                    </Typography>
+                  </Box>
+                </Modal>
+              </TableCell>
               {responses.map((response) => {
-    if (response.Date === "Saturday") {
-      return (
-        <React.Fragment key={response.id}>
-          <TableCell component="th" scope="row"></TableCell>
-          <TableCell align="right">{response.username}</TableCell>
-          <TableCell align="right">{response.time_start}</TableCell>
-          <TableCell align="right">{response.time_end}</TableCell>
-        </React.Fragment>
-      );
-    }
-    return null; // Return null when the condition is not met
-  })}
+                if (response.Date === "Saturday") {
+                  return (
+                    <React.Fragment key={response.id}>
+                      <TableCell component="th" scope="row"></TableCell>
+                      <TableCell align="right">{response.username}</TableCell>
+                      <TableCell align="right">{response.time_start}</TableCell>
+                      <TableCell align="right">{response.time_end}</TableCell>
+                    </React.Fragment>
+                  );
+                }
+                return null; // Return null when the condition is not met
+              })}
             </TableRow>
             <TableRow >
               <TableCell>Sunday</TableCell>
+              <TableCell>
+                <Button onClick={handleOpen}>sign Up</Button>
+                <Modal
+                  open={open}
+                  onClose={handleClose}
+                  aria-labelledby="SundaySignUp"
+                  aria-describedby="modal-modal-description"
+                >
+                  <Box sx={style}>
+                    <Typography id="SundaySignUp" variant="h6" component="h2">
+                      Sign up for Sunday?
+                    </Typography>
+                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                      <LocalizationProvider dateAdapter={AdapterDayjs}>
+                        <TimePicker label="Basic time picker" />
+                      </LocalizationProvider>
+                    </Typography>
+                  </Box>
+                </Modal>
+              </TableCell>
               {responses.map((response) => {
-    if (response.Date === "Sunday") {
-      return (
-        <React.Fragment key={response.id}>
-          <TableCell component="th" scope="row"></TableCell>
-          <TableCell align="right">{response.username}</TableCell>
-          <TableCell align="right">{response.time_start}</TableCell>
-          <TableCell align="right">{response.time_end}</TableCell>
-        </React.Fragment>
-      );
-    }
-    return null; // Return null when the condition is not met
-  })}
+                if (response.Date === "Sunday") {
+                  return (
+                    <React.Fragment key={response.id}>
+                      <TableCell component="th" scope="row"></TableCell>
+                      <TableCell align="right">{response.username}</TableCell>
+                      <TableCell align="right">{response.time_start}</TableCell>
+                      <TableCell align="right">{response.time_end}</TableCell>
+                    </React.Fragment>
+                  );
+                }
+                return null; // Return null when the condition is not met
+              })}
             </TableRow>
             <TableRow >
               <TableCell>Monday</TableCell>
+              <TableCell>
+                <Button onClick={handleOpen}>sign Up</Button>
+                <Modal
+                  open={open}
+                  onClose={handleClose}
+                  aria-labelledby="MondaySignUp"
+                  aria-describedby="modal-modal-description"
+                >
+                  <Box sx={style}>
+                    <Typography id="MondaySignUp" variant="h6" component="h2">
+                      Sign up for Monday?
+                    </Typography>
+                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                      <LocalizationProvider dateAdapter={AdapterDayjs}>
+                        <TimePicker label="Basic time picker" />
+                      </LocalizationProvider>
+                    </Typography>
+                  </Box>
+                </Modal>
+              </TableCell>
               {responses.map((response) => {
-    if (response.Date === "Monday") {
-      return (
-        <React.Fragment key={response.id}>
-          <TableCell component="th" scope="row"></TableCell>
-          <TableCell align="right">{response.username}</TableCell>
-          <TableCell align="right">{response.time_start}</TableCell>
-          <TableCell align="right">{response.time_end}</TableCell>
-        </React.Fragment>
-      );
-    }
-    return null; // Return null when the condition is not met
-  })}
-           </TableRow>
+                if (response.Date === "Monday") {
+                  return (
+                    <React.Fragment key={response.id}>
+                      <TableCell component="th" scope="row"></TableCell>
+                      <TableCell align="right">{response.username}</TableCell>
+                      <TableCell align="right">{response.time_start}</TableCell>
+                      <TableCell align="right">{response.time_end}</TableCell>
+                    </React.Fragment>
+                  );
+                }
+                return null; // Return null when the condition is not met
+              })}
+            </TableRow>
           </TableBody>
         </Table>
       </TableContainer>
