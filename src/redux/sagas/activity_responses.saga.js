@@ -12,8 +12,14 @@ function* fetchGroupActivityResponses(action) {
     }
   }
 
+  function* postResponse(action){
+    console.log('Inside postResponse SAGA, action.payload=', action.payload)
+    yield axios.post('/api/activity_responses', action.payload)
+}
+
 function* activity_responsesSaga() {
     yield takeLatest('FETCH_GROUP_RESPONSES', fetchGroupActivityResponses);
+    yield takeLatest('ADD_RESPONSE', postResponse)
   }
 
 

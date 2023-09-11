@@ -69,6 +69,32 @@ function ScheduleDayModal(props) {
   const [selectedStartTime, setSelectedStartTime] = useState(null);
   const [selectedEndTime, setSelectedEndTime] = useState(null);
 
+  console.log("Time", selectedStartTime)
+//   const hour = selectedStartTime.$d.getHours();
+//   let hour12 = hour % 12;
+//    if (hour12 === 0) {
+//      hour12 = 12;
+//    }
+//    const minute = date.getMinutes();
+//    const ampm = hour < 12 ? 'AM' : 'PM';
+
+//    console.log(hour12 + ':' + minute + ' ' + ampm);
+
+  const postResponse = () => {
+    console.log("clicked on postResponse")
+    dispatch({
+        type: 'ADD_RESPONSE', payload: {
+            userId: user.id,
+            groupId: groupId,
+            activity_id: activity,
+            start_time: selectedStartTime,
+            end_time: selectedEndTime,
+            date: date
+        }
+    }
+    )
+    handleClose
+}
 
   return (
     <div>
@@ -86,13 +112,13 @@ function ScheduleDayModal(props) {
             </Typography>
             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
               <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <TimePicker label="Basic time picker" 
+                <TimePicker label="Start time picker" 
                 value={selectedStartTime}
                 onChange={setSelectedStartTime}/>
-                <TimePicker label="Basic time picker" 
+                <TimePicker label="End time picker" 
                 value={selectedEndTime}
                 onChange={setSelectedEndTime}/>
-                <Button onClick={handleClose} variant="contained">SIGN UP<EventAvailableIcon/></Button>
+                <Button onClick={postResponse} variant="contained">SIGN UP<EventAvailableIcon/></Button>
               </LocalizationProvider>
             </Typography>
           </Box>
