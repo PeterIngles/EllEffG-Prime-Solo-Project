@@ -3,6 +3,8 @@ const bodyParser = require('body-parser');
 const groupsRouter = require('./routes/groups.router')
 const gamesRouter = require('./routes/games.router')
 const playersRouter = require('./routes/players.router')
+const activity_responsesRouter = require ('./routes/activity_responses.router')
+const activity = require ('./routes/activity.router')
 require('dotenv').config();
 
 const app = express();
@@ -29,6 +31,8 @@ app.use('/api/user', userRouter);
 app.use('/api/groups', groupsRouter)
 app.use('/api/games', gamesRouter)
 app.use('/api/players', playersRouter)
+app.use('/api/activity_responses', activity_responsesRouter)
+app.use('/api/activity', activity)
 
 // Serve static files
 app.use(express.static('build'));

@@ -1,6 +1,6 @@
 import React from 'react';
 import LogOutButton from '../LogOutButton/LogOutButton';
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -34,264 +34,234 @@ import { styled } from '@mui/material/styles';
 
 function UserPage() {
 
-    const style = {
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        width: 400,
-        bgcolor: 'rgb(54,54,58)',
-        border: '2px solid #000',
-        boxShadow: 24,
-        p: 4,
-      };
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'rgb(54,54,58)',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  };
 
   const dispatch = useDispatch();
   const theme = useTheme();
   const user = useSelector((store) => store.user);
   const group = useSelector((store) => store.group);
   const games = useSelector((store) => store.games)
+  const responses = useSelector((store) => store.responses)
+  const activity = useSelector((store => store.activity))
+
   const history = useHistory();
 
-console.log("The group is", group)
-console.log("The game is", games)
+  let { groupId, gameId } = useParams();
 
-let { groupId, gameId } = useParams();
+  console.log("GroupId is", groupId, "gameId is", gameId, "Response are", responses, "Activites are", activity)
 
-console.log("GroupId is", groupId, "gameId is", gameId)
+  const response = responses.find((item) => item.Date === 'Monday');
+  console.log(response);
 
-const userId= user.id
-const game = games.find((game) => game.id == gameId);
-const gameTitle = game ? game.title : 'Not found';
-const gameIcon = game ? game.icon : 'Not found';
-const [open, setOpen] = React.useState(false);
+  const userId = user.id
+  const game = games.find((game) => game.id == gameId);
+  const gameTitle = game ? game.title : 'Not found';
+  const gameIcon = game ? game.icon : 'Not found';
+  const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-useEffect(() => {
+  useEffect(() => {
     console.log("Games=", games)
     dispatch({ type: 'FETCH_USER_GAMES', payload: groupId });
-}, []);
+    dispatch({ type: 'FETCH_GROUP_RESPONSES', payload: { groupId: groupId, gameId: gameId } });
+    dispatch({ type: 'FETCH_ACTIVITY'})
+  }, []);
 
-function createData(name, calories, fat, carbs, protein, price) {
-    return {
-      name,
-      calories,
-      fat,
-      carbs,
-      protein,
-      price,
-      history: [
-        {
-          date: '2020-01-05',
-          customerId: '11091700',
-          amount: 3,
-        },
-        {
-          date: '2020-01-02',
-          customerId: 'Anonymous',
-          amount: 1,
-        },
-      ],
-    };
-  }
-  
   function Row(props) {
     const { row } = props;
     const [open, setOpen] = React.useState(false);
-
-    const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: '',
-  border: '2px solid #000',
-  boxShadow: 25,
-  p: 4,
-};
-
-
-  
-    return (
-      <React.Fragment>
-        <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
-          <TableCell>
-            <IconButton
-              aria-label="expand row"
-              size="small"
-              onClick={() => setOpen(!open)}
-            >
-              {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-            </IconButton>
-          </TableCell>
-          <TableCell component="th" scope="row">
-            {row.name}
-          </TableCell>
-          <TableCell align="right">{row.calories}</TableCell>
-          <TableCell align="right">{row.fat}</TableCell>
-          <TableCell align="right">{row.carbs}</TableCell>
-          <TableCell align="right">{row.protein}</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
-            <Collapse in={open} timeout="auto" unmountOnExit>
-              <Box sx={{ margin: 1 }}>
-                <Typography variant="h6" gutterBottom component="div">
-                  Signed Up
-                </Typography>
-                <Table size="small" aria-label="purchases">
-                  <TableHead>
-                    <TableRow>
-                      <TableCell>Player Name</TableCell>
-                      <TableCell>Times</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    
-                      <TableRow>
-                        <TableCell component="th" scope="row">
-                          HC MekkaDragon
-                        </TableCell>
-                        <TableCell>HC 8PM-10PM</TableCell>
-                      </TableRow>
-                  </TableBody>
-                </Table>
-              </Box>
-            </Collapse>
-          </TableCell>
-        </TableRow>
-      </React.Fragment>
-    );
   }
-  
-  Row.propTypes = {
-    row: PropTypes.shape({
-      calories: PropTypes.number.isRequired,
-      carbs: PropTypes.number.isRequired,
-      fat: PropTypes.number.isRequired,
-      history: PropTypes.arrayOf(
-        PropTypes.shape({
-          amount: PropTypes.number.isRequired,
-          customerId: PropTypes.string.isRequired,
-          date: PropTypes.string.isRequired,
-        }),
-      ).isRequired,
-      name: PropTypes.string.isRequired,
-      price: PropTypes.number.isRequired,
-      protein: PropTypes.number.isRequired,
-    }).isRequired,
-  };
-  
-  const rows = [
-    createData('Tuesday', 159, 6.0, 24, 4.0, 3.99),
-    createData('Wednesday', 237, 9.0, 37, 4.3, 4.99),
-    createData('Thursday', 262, 16.0, 24, 6.0, 3.79),
-    createData('Friday', 305, 3.7, 67, 4.3, 2.5),
-    createData('Saturday', 356, 16.0, 49, 3.9, 1.5),
-    createData('Sunday', 356, 16.0, 49, 3.9, 1.5),
-    createData('Monday', 356, 16.0, 49, 3.9, 1.5),
-  ];
 
   return (
     <div id="user-sidebar" className="container">
-    <Box sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-      <nav aria-label="user routes">
-        <List>
-          <ListItem disablePadding>
-          <ListItemButton>
-              <ListItemIcon >
-                <GroupsIcon />
-              </ListItemIcon>
-              <ListItemText primary={group.find(group => group.id == groupId)?.group_name || 'Not found'} />
+      <Box sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+        <nav aria-label="user routes">
+          <List>
+            <ListItem disablePadding>
+              <ListItemButton>
+                <ListItemIcon >
+                  <GroupsIcon />
+                </ListItemIcon>
+                <ListItemText primary={group.find(group => group.id == groupId)?.group_name || 'Not found'} />
 
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <CalendarMonthIcon />
-              </ListItemIcon>
-              <ListItemText primary="Group Schedule" />
-            </ListItemButton>
-          </ListItem>
-        </List>
-      </nav>
-      <Divider />
-      <nav aria-label="create options">
-        <List>
-        <ListItem disablePadding>
-            <ListItemButton >
-              <ListItemIcon>
-                <GroupAddIcon />
-              </ListItemIcon>
-              <ListItemText primary="Group Members" />
-            </ListItemButton>
-          </ListItem>
-        </List>
-      </nav>
-    </Box>
-    <div id="user-groups">
-</div>
-
-
-  
-
-        <TableContainer component={Paper} style={{ backgroundColor: theme.palette.background.default }}>
-      <Table aria-label="collapsible table">
-        <TableHead>
-          <TableRow>
-           <TableCell><div><h2>{game.title}</h2>
-        <img src={game.icon} alt={game.title} style={{ width: '5%', height: 'auto' }}/>
-        <p>Reset Time: {game.reset}</p></div></TableCell>
-            <TableCell>Day</TableCell>
-            <TableCell align="right">Activty 1</TableCell>
-            <TableCell align="right">Activity 2</TableCell>
-            <TableCell align="right">Activity 3</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-  {rows.map((row) => (
-    <React.Fragment key={row.name}>
-      <Row row={row} />
-      <div>
-        <Button onClick={handleOpen}>Open modal</Button>
-        <Modal
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-          BackdropProps={{
-            // Additional backdrop props can be provided here
-            timeout: 500, // Adjust the transition duration of the backdrop here
-            style: { opacity: 0.5 }, // Adjust the opacity of the backdrop here
-          }}
-        >
-          <Box sx={style}>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
-              Text in a modal
-            </Typography>
-            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-              Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-            </Typography>
-          </Box>
-        </Modal>
+              </ListItemButton>
+            </ListItem>
+            <ListItem disablePadding>
+              <ListItemButton>
+                <ListItemIcon>
+                  <CalendarMonthIcon />
+                </ListItemIcon>
+                <ListItemText primary="Group Schedule" />
+              </ListItemButton>
+            </ListItem>
+          </List>
+        </nav>
+        <Divider />
+        <nav aria-label="create options">
+          <List>
+            <ListItem disablePadding>
+              <ListItemButton >
+                <ListItemIcon>
+                  <GroupAddIcon />
+                </ListItemIcon>
+                <ListItemText primary="Group Members" />
+              </ListItemButton>
+            </ListItem>
+          </List>
+        </nav>
+      </Box>
+      <div id="user-groups">
       </div>
-    </React.Fragment>
-  ))}
-</TableBody>
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell><div><h2>{game.title}</h2>
+                <img src={game.icon} alt={game.title} style={{ width: '5%', height: 'auto' }} />
+                <p>Reset Time: {game.reset}</p></div></TableCell>
+                {activity.map((activity) => (
+              <TableCell key={activity.id} align="right">{activity.activity_name}</TableCell>
+             ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+          <TableRow>
+  <TableCell>Tuesday</TableCell>
+  {responses.map((response) => {
+    if (response.Date === "Tuesday") {
+      return (
+        <React.Fragment key={response.id}>
+          <TableCell component="th" scope="row"></TableCell>
+          <TableCell align="right">{response.username}</TableCell>
+          <TableCell align="right">{response.time_start}</TableCell>
+          <TableCell align="right">{response.time_end}</TableCell>
+        </React.Fragment>
+      );
+    }
+    return null; // Return null when the condition is not met
+  })}
+</TableRow>
 
-      </Table>
-    </TableContainer>
+            <TableRow >
+              <TableCell>Wednesday</TableCell>
+              {responses.map((response) => {
+    if (response.Date === "Wednesday") {
+      return (
+        <React.Fragment key={response.id}>
+          <TableCell component="th" scope="row"></TableCell>
+          <TableCell align="right">{response.username}</TableCell>
+          <TableCell align="right">{response.time_start}</TableCell>
+          <TableCell align="right">{response.time_end}</TableCell>
+        </React.Fragment>
+      );
+    }
+    return null; // Return null when the condition is not met
+  })}
+            </TableRow>
+            <TableRow >
+              <TableCell>Thursday</TableCell>
+              {responses.map((response) => {
+    if (response.Date === "Thursday") {
+      return (
+        <React.Fragment key={response.id}>
+          <TableCell component="th" scope="row"></TableCell>
+          <TableCell align="right">{response.username}</TableCell>
+          <TableCell align="right">{response.time_start}</TableCell>
+          <TableCell align="right">{response.time_end}</TableCell>
+        </React.Fragment>
+      );
+    }
+    return null; // Return null when the condition is not met
+  })}
+            </TableRow>
+            <TableRow >
+              <TableCell>Friday</TableCell>
+              {responses.map((response) => {
+    if (response.Date === "Friday") {
+      return (
+        <React.Fragment key={response.id}>
+          <TableCell component="th" scope="row"></TableCell>
+          <TableCell align="right">{response.username}</TableCell>
+          <TableCell align="right">{response.time_start}</TableCell>
+          <TableCell align="right">{response.time_end}</TableCell>
+        </React.Fragment>
+      );
+    }
+    return null; // Return null when the condition is not met
+  })}
+            </TableRow>
+            <TableRow >
+              <TableCell>Saturday</TableCell>
+              {responses.map((response) => {
+    if (response.Date === "Saturday") {
+      return (
+        <React.Fragment key={response.id}>
+          <TableCell component="th" scope="row"></TableCell>
+          <TableCell align="right">{response.username}</TableCell>
+          <TableCell align="right">{response.time_start}</TableCell>
+          <TableCell align="right">{response.time_end}</TableCell>
+        </React.Fragment>
+      );
+    }
+    return null; // Return null when the condition is not met
+  })}
+            </TableRow>
+            <TableRow >
+              <TableCell>Sunday</TableCell>
+              {responses.map((response) => {
+    if (response.Date === "Sunday") {
+      return (
+        <React.Fragment key={response.id}>
+          <TableCell component="th" scope="row"></TableCell>
+          <TableCell align="right">{response.username}</TableCell>
+          <TableCell align="right">{response.time_start}</TableCell>
+          <TableCell align="right">{response.time_end}</TableCell>
+        </React.Fragment>
+      );
+    }
+    return null; // Return null when the condition is not met
+  })}
+            </TableRow>
+            <TableRow >
+              <TableCell>Monday</TableCell>
+              {responses.map((response) => {
+    if (response.Date === "Monday") {
+      return (
+        <React.Fragment key={response.id}>
+          <TableCell component="th" scope="row"></TableCell>
+          <TableCell align="right">{response.username}</TableCell>
+          <TableCell align="right">{response.time_start}</TableCell>
+          <TableCell align="right">{response.time_end}</TableCell>
+        </React.Fragment>
+      );
+    }
+    return null; // Return null when the condition is not met
+  })}
+           </TableRow>
+          </TableBody>
+        </Table>
+      </TableContainer>
 
-        
 
-    
+
+
+
       <h2>Welcome, {user.username}!</h2>
       <p>Your ID is: {user.id}</p>
       <LogOutButton className="btn" />
     </div>
+
   );
 }
 

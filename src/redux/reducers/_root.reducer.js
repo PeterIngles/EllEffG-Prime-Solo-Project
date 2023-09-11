@@ -4,6 +4,8 @@ import user from './user.reducer';
 import group from './group.reducer'
 import games from './games.reducer'
 import players from './players.reducer'
+import responses from './activity_responses.reducer'
+import activity from './activity.reducer'
 
 
 
@@ -18,7 +20,9 @@ const rootReducer = combineReducers({
   user, // will have an id and username if someone is logged in
   group,
   games,
-  players
+  players,
+  responses,
+  activity
 });
 
 export default rootReducer;
