@@ -32,8 +32,6 @@ function ScheduleDayModal(props) {
 
     const date  = props.id;
 
-    console.log("DAAAATE",props)
-
   const style = {
     position: 'absolute',
     top: '50%',
@@ -58,48 +56,57 @@ function ScheduleDayModal(props) {
 
   let { groupId, gameId } = useParams();
 
-  console.log("GroupId is", groupId, "gameId is", gameId, "Response are", responses, "Activites are", activity)
+//   console.log("GroupId is", groupId, "gameId is", gameId, "Response are", responses, "Activites are", activity)
 
-  const response = responses.find((item) => item.Date === 'Monday');
-  console.log(response);
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [selectedStartTime, setSelectedStartTime] = useState(null);
-  const [selectedEndTime, setSelectedEndTime] = useState(null);
+  const [selectedStartTime, setSelectedStartTime] = useState({});
+  const [selectedEndTime, setSelectedEndTime] = useState({});
 
-  console.log("Time", selectedStartTime)
-//   const hour = selectedStartTime.$d.getHours();
-//   let hour12 = hour % 12;
-//    if (hour12 === 0) {
-//      hour12 = 12;
-//    }
-//    const minute = date.getMinutes();
-//    const ampm = hour < 12 ? 'AM' : 'PM';
+  let responseCheck = responses.find(response => 
+    response.Date == date && response.user_id === user.id
+);
 
-//    console.log(hour12 + ':' + minute + ' ' + ampm);
+  let startHour = selectedStartTime.$H;
+  let startMinute = String(selectedStartTime.$m).padStart(2, '0');
+  let startAMPM = startHour >= 12 ? "PM" : "AM";
+  if (startHour >= 13) {
+    startHour = startHour - 12;
+  }
+  let formattedStartTime = `${startHour}:${startMinute} ${startAMPM}`;
+
+  
+  let endHour = selectedEndTime.$H
+  let endMinute = String(selectedEndTime.$m).padStart(2, '0');
+  let endAMPM = endHour >= 12 ? "PM" : "AM";
+  if (endHour >= 13) {
+    endHour = endHour - 12;
+  }
+  let formattedEndTime = `${endHour}:${endMinute} ${endAMPM}`;
 
   const postResponse = () => {
-    console.log("clicked on postResponse")
     dispatch({
         type: 'ADD_RESPONSE', payload: {
             userId: user.id,
             groupId: groupId,
             activity_id: activity,
-            start_time: selectedStartTime,
-            end_time: selectedEndTime,
+            start_time: formattedStartTime,
+            end_time: formattedEndTime,
             date: date
         }
     }
     )
-    handleClose
+   handleClose()
 }
 
-  return (
-    <div>
-      <TableCell>
-      <Button onClick={handleOpen} variant="contained">Sign Up</Button>
+const renderContent = () => {
+  if (responseCheck) {
+      return (
+          <div>
+             <TableCell>
+      <Button onClick={handleOpen} variant="contained">REMOVE SIGN UP</Button>
         <Modal
           open={open}
           onClose={handleClose}
@@ -124,8 +131,43 @@ function ScheduleDayModal(props) {
           </Box>
         </Modal>
       </TableCell>
-    </div>
-  );
+          </div>
+      );
+  } else {
+      return (
+          <div>
+             <TableCell>
+    <Button onClick={handleOpen} variant="contained">Sign Up</Button>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="SignUp"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="SignUp" variant="h6" component="h2">
+            Sign up for {date}?
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <TimePicker label="Start time picker" 
+              value={selectedStartTime}
+              onChange={setSelectedStartTime}/>
+              <TimePicker label="End time picker" 
+              value={selectedEndTime}
+              onChange={setSelectedEndTime}/>
+              <Button onClick={postResponse} variant="contained">SIGN UP<EventAvailableIcon/></Button>
+            </LocalizationProvider>
+          </Typography>
+        </Box>
+      </Modal>
+    </TableCell>
+          </div>
+      );
+  }
+  
+}
+return renderContent();
 }
 
 // this allows us to use <App /> in index.js

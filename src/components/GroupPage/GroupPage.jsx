@@ -56,7 +56,9 @@ const toGameSchedule = (groupId, gameId) => {
               <ListItemIcon>
                 <CalendarMonthIcon />
               </ListItemIcon>
-              <ListItemText primary="Group Schedule" />
+              <ListItemText>
+                
+                </ListItemText>
             </ListItemButton>
           </ListItem>
         </List>

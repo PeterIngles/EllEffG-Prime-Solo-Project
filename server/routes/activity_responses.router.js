@@ -27,8 +27,8 @@ router.get('/:id/id', (req, res) => {
 router.post('/', (req, res) => {
     console.log("Inside POST /activity_responses");
     const userId = req.body.userId;
-    const groupId = req.body.groupId;
-    const activity_id = req.body.activity_id;
+    const groupId = Number(req.body.groupId);
+    const activity_id = req.body.activity_id[0].id;
     const start_time = req.body.start_time;
     const activityDate = req.body.date;
     const end_time = req.body.end_time;
@@ -36,10 +36,10 @@ router.post('/', (req, res) => {
     console.log("userId=", userId, "groupId=", groupId, "activity_id=", activity_id, "date", activityDate, "start_time=", start_time, "end_time=", end_time);
 
     const queryText = `
-      INSERT INTO activity_responses (user_id, activity_id, "Date", "time_start", "time_end", group_id)
-      VALUES (\$1, \$2, \$3, \$4, \$5, \$6)
+    INSERT INTO activity_responses (user_id, activity_id, "Date", "time_start", "time_end", group_id)
+    VALUES (\$1, \$2, \$3, \$4, \$5, \$6)
   `;
-    const queryParams = [userId, groupId, activity_id, activityDate, start_time, end_time];
+  const queryParams = [userId, activity_id, activityDate, start_time, end_time, groupId];
     console.log("QueryParams=", queryParams);
     pool.query(queryText, queryParams)
         .then((result) => {
