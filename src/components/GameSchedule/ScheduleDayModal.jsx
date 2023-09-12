@@ -134,7 +134,7 @@ function ScheduleDayModal(prop) {
               open={open}
               onClose={handleClose}
               aria-labelledby="SignUp"
-              aria-describedby="modal-modal-description"
+              aria-describedby="SignUp"
             >
               <Box sx={style}>
                 <Typography id="SignUp" variant="h6" component="h2">

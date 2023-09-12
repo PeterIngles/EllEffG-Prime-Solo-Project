@@ -41,6 +41,7 @@ import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
+import EditTimeModal from './EditTimeModal';
 
 function GameSchedule(date) {
 
@@ -75,9 +76,6 @@ function GameSchedule(date) {
   const dates = ["Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Monday"]
 
   console.log("GroupId is", groupId, "gameId is", gameId, "Response are", responses, "Activites are", activity)
-
-  const response = responses.find((item) => item.Date === 'Monday');
-  console.log(response);
 
   const game = games.find((game) => game.id == gameId);
 
@@ -163,8 +161,8 @@ function GameSchedule(date) {
                     <React.Fragment key={response.id}>
                       <TableCell component="th" scope="row"></TableCell>
                       <TableCell align="right">{response.username}</TableCell>
-                      <TableCell align="right">{response.time_start}</TableCell>
-                      <TableCell align="right">{response.time_end}</TableCell>
+                      <TableCell align="right">{response.time_start} </TableCell>
+                      <TableCell align="right">{response.time_end}</TableCell><EditTimeModal id={response.user_id}/>
                     </React.Fragment>
                   );
                 }
@@ -182,7 +180,7 @@ function GameSchedule(date) {
                       <TableCell component="th" scope="row"></TableCell>
                       <TableCell align="right">{response.username}</TableCell>
                       <TableCell align="right">{response.time_start}</TableCell>
-                      <TableCell align="right">{response.time_end}</TableCell>
+                      <TableCell align="right">{response.time_end}</TableCell><EditTimeModal id={response.user_id}/>
                     </React.Fragment>
                   );
                 }
@@ -198,8 +196,8 @@ function GameSchedule(date) {
                     <React.Fragment key={response.id}>
                       <TableCell component="th" scope="row"></TableCell>
                       <TableCell align="right">{response.username}</TableCell>
-                      <TableCell align="right">{response.time_start}</TableCell>
-                      <TableCell align="right">{response.time_end}</TableCell>
+                      <TableCell align="right">{response.time_start} </TableCell>
+                      <TableCell align="right">{response.time_end}</TableCell><EditTimeModal id={response.user_id}/>
                     </React.Fragment>
                   );
                 }
@@ -215,8 +213,8 @@ function GameSchedule(date) {
                     <React.Fragment key={response.id}>
                       <TableCell component="th" scope="row"></TableCell>
                       <TableCell align="right">{response.username}</TableCell>
-                      <TableCell align="right">{response.time_start}</TableCell>
-                      <TableCell align="right">{response.time_end}</TableCell>
+                      <TableCell align="right">{response.time_start} </TableCell>
+                      <TableCell align="right">{response.time_end}</TableCell><EditTimeModal id={response.user_id}/>
                     </React.Fragment>
                   );
                 }
@@ -232,8 +230,8 @@ function GameSchedule(date) {
                     <React.Fragment key={response.id}>
                       <TableCell component="th" scope="row"></TableCell>
                       <TableCell align="right">{response.username}</TableCell>
-                      <TableCell align="right">{response.time_start}</TableCell>
-                      <TableCell align="right">{response.time_end}</TableCell>
+                      <TableCell align="right">{response.time_start} </TableCell>
+                      <TableCell align="right">{response.time_end}</TableCell><EditTimeModal id={response.user_id}/>
                     </React.Fragment>
                   );
                 }
@@ -249,8 +247,8 @@ function GameSchedule(date) {
                     <React.Fragment key={response.id}>
                       <TableCell component="th" scope="row"></TableCell>
                       <TableCell align="right">{response.username}</TableCell>
-                      <TableCell align="right">{response.time_start}</TableCell>
-                      <TableCell align="right">{response.time_end}</TableCell>
+                      <TableCell align="right">{response.time_start} </TableCell>
+                      <TableCell align="right">{response.time_end}</TableCell><EditTimeModal id={response.user_id}/>
                     </React.Fragment>
                   );
                 }
@@ -266,8 +264,8 @@ function GameSchedule(date) {
                     <React.Fragment key={response.id}>
                       <TableCell component="th" scope="row"></TableCell>
                       <TableCell align="right">{response.username}</TableCell>
-                      <TableCell align="right">{response.time_start}</TableCell>
-                      <TableCell align="right">{response.time_end}</TableCell>
+                      <TableCell align="right">{response.time_start} </TableCell>
+                      <TableCell align="right">{response.time_end}</TableCell><EditTimeModal id={response.user_id}/>
                     </React.Fragment>
                   );
                 }
