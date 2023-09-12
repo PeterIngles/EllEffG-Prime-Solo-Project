@@ -8,10 +8,12 @@ import TableCell from '@mui/material/TableCell';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
+import { useParams } from 'react-router-dom';
 
 function EditTimeModal(props) {
 
   const { id, date } = props.prop;
+  let { groupId, gameId } = useParams();
 
   const style = {
     position: 'absolute',
@@ -29,6 +31,7 @@ function EditTimeModal(props) {
   const user = useSelector((store) => store.user);
   const responses = useSelector((store) => store.responses);
   const activity = useSelector((store) => store.activity);
+  const group = useSelector((store) => store.group);
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -36,29 +39,44 @@ function EditTimeModal(props) {
   const [selectedStartTime, setSelectedStartTime] = useState({});
   const [selectedEndTime, setSelectedEndTime] = useState({});
 
-  console.log("Response", responses, "userid", user)
+  console.log("Response", responses, "userid", user, "groupid", group)
+
+
+  let startHour = selectedStartTime.$H;
+  let startMinute = String(selectedStartTime.$m).padStart(2, '0');
+  let startAMPM = startHour >= 12 ? "PM" : "AM";
+  if (startHour >= 13) {
+    startHour = startHour - 12;
+  }
+  let formattedStartTime = `${startHour}:${startMinute} ${startAMPM}`;
+
+
+  let endHour = selectedEndTime.$H
+  let endMinute = String(selectedEndTime.$m).padStart(2, '0');
+  let endAMPM = endHour >= 12 ? "PM" : "AM";
+  if (endHour >= 13) {
+    endHour = endHour - 12;
+  }
+  let formattedEndTime = `${endHour}:${endMinute} ${endAMPM}`;
 
 
 
-
-
-
-  // const editTimeResponse = () => {
-  //   console.log('Inside editTimeResponse');
-  //   // Dispatch your edit action here
-  //   dispatch({
-  //     type: 'EDIT_RESPONSE', // Change this to your actual edit action type
-  //     payload: {
-  //       date: date,
-  //       userId: user.id,
-  //       groupId: groupId,
-  //       activity_id: activity,
-  //       startTime: selectedStartTime,
-  //       endTime: selectedEndTime,
-  //     },
-  //   });
-  //   handleClose();
-  // };
+  const editTimeResponse = () => {
+    console.log('Inside editTimeResponse');
+    // Dispatching edit action here
+    dispatch({
+      type: 'EDIT_RESPONSE', 
+      payload: {
+        date: date,
+        userId: id,
+        groupId: groupId,
+        activity_id: activity,
+        startTime: formattedStartTime,
+        endTime: formattedEndTime
+      },
+    });
+    handleClose();
+  };
 
   const renderContent = () => {
     if (id === user.id) {
@@ -96,7 +114,7 @@ function EditTimeModal(props) {
                     />
                     <Button
                       variant="contained"
-                      // onClick={editTimeResponse}
+                      onClick={editTimeResponse}
                     >
                       Edit Time
                     </Button>
