@@ -12,7 +12,7 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import GroupsIcon from '@mui/icons-material/Groups';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import { useHistory } from 'react-router-dom'
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Collapse from '@mui/material/Collapse';
@@ -36,10 +36,17 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import ScheduleDayModal from './ScheduleDayModal';
-
-
+import Avatar from '@mui/material/Avatar';
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
 function GameSchedule(date) {
+
+  const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
 
   const style = {
     position: 'absolute',
@@ -72,13 +79,7 @@ function GameSchedule(date) {
   const response = responses.find((item) => item.Date === 'Monday');
   console.log(response);
 
-  const userId = user.id
   const game = games.find((game) => game.id == gameId);
-  const gameTitle = game ? game.title : 'Not found';
-  const gameIcon = game ? game.icon : 'Not found';
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
 
   useEffect(() => {
     console.log("Games=", games)
@@ -90,6 +91,11 @@ function GameSchedule(date) {
   const backToGroup = () => {
     history.push(`/group/${groupId}`)
   }
+
+  const toGameSchedule = (gameId) => {
+    console.log("clicked on")
+    history.push(`/gameschedule/${groupId}/${gameId}`)
+}
 
   return (
     <div id="user-sidebar" className="container">
@@ -105,14 +111,18 @@ function GameSchedule(date) {
 
               </ListItemButton>
             </ListItem>
-            <ListItem disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  <CalendarMonthIcon />
-                </ListItemIcon>
-                <ListItemText primary="Group Schedule" />
-              </ListItemButton>
-            </ListItem>
+          {games.map((game) => (
+          <ListItem disablePadding>
+            <ListItemButton key={game.id} onClick={() => toGameSchedule(game.id)}>
+              <ListItemIcon>
+              <Avatar alt={game.title} src={game.icon} />
+              </ListItemIcon>
+              <ListItemText>
+              {game.title}
+                </ListItemText>
+            </ListItemButton>
+          </ListItem>
+            ))}
           </List>
         </nav>
         <Divider />
@@ -267,11 +277,7 @@ function GameSchedule(date) {
           </TableBody>
         </Table>
       </TableContainer>
-
-
-
-
-
+      
       <h2>Welcome, {user.username}!</h2>
       <p>Your ID is: {user.id}</p>
       <LogOutButton className="btn" />

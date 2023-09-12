@@ -28,11 +28,15 @@ import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 import CancelIcon from '@mui/icons-material/Cancel';
 import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
 
 
-function ScheduleDayModal(props) {
+function ScheduleDayModal(prop) {
 
-  const date = props.id;
+
+  let date = prop.id;
+  console.log("DATE", date)
 
   const style = {
     position: 'absolute',
@@ -59,6 +63,7 @@ function ScheduleDayModal(props) {
   let { groupId, gameId } = useParams();
 
   //   console.log("GroupId is", groupId, "gameId is", gameId, "Response are", responses, "Activites are", activity)
+
 
 
   const [open, setOpen] = React.useState(false);
@@ -99,8 +104,8 @@ function ScheduleDayModal(props) {
         date: date
       }
     }
-    )
-    handleClose()
+    )  
+    handleClose();
   }
 
   const deleteResponse = () => {
@@ -114,16 +119,17 @@ function ScheduleDayModal(props) {
 
       }
     })
-
+    handleClose();
   }
 
   const renderContent = () => {
     if (responseCheck) {
       return (
+
         ///Renders if signed up
         <div>
           <TableCell>
-            <Button onClick={handleOpen} variant="contained">REMOVE SIGN UP</Button>
+            <Button onClick={handleOpen} variant="outlined" color="error">REMOVE SIGN UP</Button>
             <Modal
               open={open}
               onClose={handleClose}
@@ -180,6 +186,7 @@ function ScheduleDayModal(props) {
     }
 
   }
+
   return renderContent();
 }
 

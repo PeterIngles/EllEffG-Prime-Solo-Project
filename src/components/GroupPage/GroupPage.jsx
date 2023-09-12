@@ -14,6 +14,7 @@ import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import { useHistory } from 'react-router-dom'
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import Avatar from '@mui/material/Avatar';
 
 function UserPage() {
 
@@ -51,16 +52,19 @@ const toGameSchedule = (groupId, gameId) => {
               <ListItemText primary={group.find(group => group.id === id)?.group_name || 'Not found'} />
             </ListItemButton>
           </ListItem>
+          
+    {games.map((game) => (
           <ListItem disablePadding>
-            <ListItemButton>
+            <ListItemButton key={game.id} onClick={() => toGameSchedule(id, game.id)}>
               <ListItemIcon>
-                <CalendarMonthIcon />
+              <Avatar alt={game.title} src={game.icon} />
               </ListItemIcon>
               <ListItemText>
-                
+              {game.title}
                 </ListItemText>
             </ListItemButton>
           </ListItem>
+            ))}
         </List>
       </nav>
       <Divider />
@@ -77,21 +81,6 @@ const toGameSchedule = (groupId, gameId) => {
         </List>
       </nav>
     </Box>
-    <div id="user-groups">
-   
- 
-</div>
-<div>
-    {games.map((game) => (
-      <div key={game.id} onClick={() => toGameSchedule(id, game.id)}>
-        <h2>{game.title}</h2>
-        <img src={game.icon} alt={game.title} style={{ width: '5%', height: 'auto' }}/>
-        <p>Reset Time: {game.reset}</p>
-      </div>
-    ))}
-  </div>
-
-    
       <h2>Welcome, {user.username}!</h2>
       <p>Your ID is: {user.id}</p>
       <LogOutButton className="btn" />
