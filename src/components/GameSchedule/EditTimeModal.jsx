@@ -39,7 +39,7 @@ function EditTimeModal(props) {
   const [selectedStartTime, setSelectedStartTime] = useState({});
   const [selectedEndTime, setSelectedEndTime] = useState({});
 
-  console.log("Response", responses, "userid", user, "groupid", group)
+  console.log("Response", responses, "userid", user, "groupid", group, "activity", activity)
 
 
   let startHour = selectedStartTime.$H;
@@ -70,7 +70,6 @@ function EditTimeModal(props) {
         date: date,
         userId: id,
         groupId: groupId,
-        activity_id: activity,
         startTime: formattedStartTime,
         endTime: formattedEndTime
       },

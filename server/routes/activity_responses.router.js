@@ -78,6 +78,33 @@ router.delete('/', (req, res) => {
         });
 });
 
+router.put('/', (req, res) => {
+    console.log("Inside PUT /activity_responses", req.body);
+    const userId = req.body.data.userId;
+    const groupId = Number(req.body.data.groupId);
+    const start_time = req.body.data.startTime;
+    const activityDate = req.body.data.date;
+    const end_time = req.body.data.endTime;
+
+    console.log("userId=", userId, "groupId=", groupId, "date", activityDate, "start_time=", start_time, "end_time=", end_time);
+
+    const queryText = `
+    UPDATE activity_responses
+SET time_start = $1, time_end = $2
+WHERE group_id = $3 AND "Date" = $4 AND user_id = $5;
+`;
+    const queryParams = [start_time, end_time, groupId, activityDate, userId];
+    console.log("QueryParams=", queryParams);
+    pool.query(queryText, queryParams)
+        .then((result) => {
+            res.sendStatus(201);
+        })
+        .catch((error) => {
+            res.sendStatus(500);
+            console.log("ERROR on PUT activityResponse", req.body);
+        });
+});
+
 
 
 

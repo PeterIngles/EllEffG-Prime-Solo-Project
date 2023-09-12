@@ -12,7 +12,7 @@ function* fetchGroupActivityResponses(action) {
     }
   }
 
-  function* postResponse(action){
+function* postResponse(action){
     console.log('Inside postResponse SAGA, action.payload=', action.payload)
     yield axios.post('/api/activity_responses', action.payload)
 }
@@ -22,10 +22,16 @@ function* deleteResponse(action){
   yield axios.delete('/api/activity_responses', {data: action.payload})
 }
 
+function* editResponse(action){
+  console.log('Inside editResponse SAGA, action.payload=', action.payload)
+  yield axios.put('/api/activity_responses', {data: action.payload})
+}
+
 function* activity_responsesSaga() {
     yield takeLatest('FETCH_GROUP_RESPONSES', fetchGroupActivityResponses);
     yield takeLatest('ADD_RESPONSE', postResponse)
     yield takeLatest('DELETE_RESPONSE', deleteResponse)
+    yield takeLatest('EDIT_RESPONSE', editResponse)
   }
 
 
