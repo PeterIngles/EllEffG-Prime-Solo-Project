@@ -75,12 +75,12 @@ function GameSchedule(date) {
 
   const dates = ["Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Monday"]
 
-  console.log("GroupId is", groupId, "gameId is", gameId, "Response are", responses, "Activites are", activity)
+  // console.log("GroupId is", groupId, "gameId is", gameId, "Response are", responses, "Activites are", activity)
 
   const game = games.find((game) => game.id == gameId);
 
   useEffect(() => {
-    console.log("Games=", games)
+    // console.log("Games=", games)
     dispatch({ type: 'FETCH_USER_GAMES', payload: groupId });
     dispatch({ type: 'FETCH_GROUP_RESPONSES', payload: { groupId: groupId, gameId: gameId } });
     dispatch({ type: 'FETCH_ACTIVITY' })
@@ -91,7 +91,7 @@ function GameSchedule(date) {
   }
 
   const toGameSchedule = (gameId) => {
-    console.log("clicked on")
+    // console.log("clicked on")
     history.push(`/gameschedule/${groupId}/${gameId}`)
 }
 
@@ -162,7 +162,7 @@ function GameSchedule(date) {
                       <TableCell component="th" scope="row"></TableCell>
                       <TableCell align="right">{response.username}</TableCell>
                       <TableCell align="right">{response.time_start} </TableCell>
-                      <TableCell align="right">{response.time_end}</TableCell><EditTimeModal id={response.user_id}/>
+                      <TableCell align="right">{response.time_end}</TableCell><EditTimeModal prop={ {id: response.user_id, date: dates[0]} } />
                     </React.Fragment>
                   );
                 }
@@ -180,7 +180,7 @@ function GameSchedule(date) {
                       <TableCell component="th" scope="row"></TableCell>
                       <TableCell align="right">{response.username}</TableCell>
                       <TableCell align="right">{response.time_start}</TableCell>
-                      <TableCell align="right">{response.time_end}</TableCell><EditTimeModal id={response.user_id}/>
+                      <TableCell align="right">{response.time_end}</TableCell><EditTimeModal prop={ {id: response.user_id, date: dates[1]} }/>
                     </React.Fragment>
                   );
                 }
@@ -197,7 +197,7 @@ function GameSchedule(date) {
                       <TableCell component="th" scope="row"></TableCell>
                       <TableCell align="right">{response.username}</TableCell>
                       <TableCell align="right">{response.time_start} </TableCell>
-                      <TableCell align="right">{response.time_end}</TableCell><EditTimeModal id={response.user_id}/>
+                      <TableCell align="right">{response.time_end}</TableCell><EditTimeModal prop={ {id: response.user_id, date: dates[2]} }/>
                     </React.Fragment>
                   );
                 }
@@ -214,7 +214,7 @@ function GameSchedule(date) {
                       <TableCell component="th" scope="row"></TableCell>
                       <TableCell align="right">{response.username}</TableCell>
                       <TableCell align="right">{response.time_start} </TableCell>
-                      <TableCell align="right">{response.time_end}</TableCell><EditTimeModal id={response.user_id}/>
+                      <TableCell align="right">{response.time_end}</TableCell><EditTimeModal prop={ {id: response.user_id, date: dates[3]} }/>
                     </React.Fragment>
                   );
                 }
@@ -231,7 +231,7 @@ function GameSchedule(date) {
                       <TableCell component="th" scope="row"></TableCell>
                       <TableCell align="right">{response.username}</TableCell>
                       <TableCell align="right">{response.time_start} </TableCell>
-                      <TableCell align="right">{response.time_end}</TableCell><EditTimeModal id={response.user_id}/>
+                      <TableCell align="right">{response.time_end}</TableCell><EditTimeModal prop={ {id: response.user_id, date: dates[4]} }/>
                     </React.Fragment>
                   );
                 }
@@ -248,7 +248,7 @@ function GameSchedule(date) {
                       <TableCell component="th" scope="row"></TableCell>
                       <TableCell align="right">{response.username}</TableCell>
                       <TableCell align="right">{response.time_start} </TableCell>
-                      <TableCell align="right">{response.time_end}</TableCell><EditTimeModal id={response.user_id}/>
+                      <TableCell align="right">{response.time_end}</TableCell><EditTimeModal prop={ {id: response.user_id, date: dates[5]} }/>
                     </React.Fragment>
                   );
                 }
@@ -265,7 +265,7 @@ function GameSchedule(date) {
                       <TableCell component="th" scope="row"></TableCell>
                       <TableCell align="right">{response.username}</TableCell>
                       <TableCell align="right">{response.time_start} </TableCell>
-                      <TableCell align="right">{response.time_end}</TableCell><EditTimeModal id={response.user_id}/>
+                      <TableCell align="right">{response.time_end}</TableCell><EditTimeModal prop={ {id: response.user_id, date: dates[6]} }/>
                     </React.Fragment>
                   );
                 }

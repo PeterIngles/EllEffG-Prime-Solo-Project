@@ -36,7 +36,7 @@ function ScheduleDayModal(prop) {
 
 
   let date = prop.id;
-  console.log("DATE", date)
+  // console.log("DATE", date)
 
   const style = {
     position: 'absolute',
@@ -109,7 +109,7 @@ function ScheduleDayModal(prop) {
   }
 
   const deleteResponse = () => {
-    console.log("Inside deleteResponse")
+    // console.log("Inside deleteResponse")
     dispatch({
       type: 'DELETE_RESPONSE', payload: {
         date: date,

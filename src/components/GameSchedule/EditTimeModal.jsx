@@ -9,10 +9,9 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 
-function EditTimeModal(prop) {
-console.log("Propppy", prop)
+function EditTimeModal(props) {
 
-
+  const { id, date } = props.prop;
 
   const style = {
     position: 'absolute',
@@ -62,7 +61,7 @@ console.log("Propppy", prop)
   // };
 
   const renderContent = () => {
-    if (prop.id === user.id) {
+    if (id === user.id) {
       return (
         <div>
           <TableCell>
@@ -81,7 +80,7 @@ console.log("Propppy", prop)
             >
               <Box sx={style}>
                 <Typography id="EditTime" variant="h6" component="h2">
-                  Edit Time for
+                  Edit availability time on {date}
                 </Typography>
                 <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
