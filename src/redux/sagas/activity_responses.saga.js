@@ -17,9 +17,15 @@ function* fetchGroupActivityResponses(action) {
     yield axios.post('/api/activity_responses', action.payload)
 }
 
+function* deleteResponse(action){
+  console.log('Inside deleteResponse SAGA, action.payload=', action.payload)
+  yield axios.delete('/api/activity_responses', {data: action.payload})
+}
+
 function* activity_responsesSaga() {
     yield takeLatest('FETCH_GROUP_RESPONSES', fetchGroupActivityResponses);
     yield takeLatest('ADD_RESPONSE', postResponse)
+    yield takeLatest('DELETE_RESPONSE', deleteResponse)
   }
 
 

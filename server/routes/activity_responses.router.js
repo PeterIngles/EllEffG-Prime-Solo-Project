@@ -39,7 +39,7 @@ router.post('/', (req, res) => {
     INSERT INTO activity_responses (user_id, activity_id, "Date", "time_start", "time_end", group_id)
     VALUES (\$1, \$2, \$3, \$4, \$5, \$6)
   `;
-  const queryParams = [userId, activity_id, activityDate, start_time, end_time, groupId];
+    const queryParams = [userId, activity_id, activityDate, start_time, end_time, groupId];
     console.log("QueryParams=", queryParams);
     pool.query(queryText, queryParams)
         .then((result) => {
@@ -50,6 +50,35 @@ router.post('/', (req, res) => {
             console.log("ERROR on POST activityResponse", req.body);
         });
 });
+
+router.delete('/', (req, res) => {
+    console.log("Inside DELETE /activity_responses", req.body);
+    const userId = req.body.userId;
+    const groupId = Number(req.body.groupId);
+    const activity_id = req.body.activity_id[0].id;
+    const activityDate = req.body.date;
+
+    console.log("userId=", userId, "groupId=", groupId, "activity_id=", activity_id, "date", activityDate);
+
+    const queryText = `
+    DELETE FROM activity_responses
+    WHERE "Date" = $1
+        AND user_id = $2
+        AND group_id = $3 
+        AND activity_id = $4;`;
+    const queryParams = [activityDate, userId, groupId, activity_id];
+    console.log("QueryParams=", queryParams);
+    pool.query(queryText, queryParams)
+        .then((result) => {
+            res.sendStatus(201);
+        })
+        .catch((error) => {
+            res.sendStatus(500);
+            console.log("ERROR on DELETE activityResponse", req.body);
+        });
+});
+
+
 
 
 module.exports = router;
