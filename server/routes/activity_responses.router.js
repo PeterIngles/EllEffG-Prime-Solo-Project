@@ -8,11 +8,10 @@ router.get('/:id/id', (req, res) => {
     const gameId = req.query.gameId;
     console.log("Inside GET /activity_responses/id req.query", req.query)
     const queryParams = [gameId, groupId];
-    const query = `SELECT ar.*, "user".username
+    const query = `SELECT ar.*, u.username
     FROM activity_responses ar
-    JOIN activity a ON a.id = ar.activity_id
-    JOIN "user" ON "user".id = ar.user_id
-    WHERE a.game_id = $1
+    JOIN "user" u ON u.id = ar.user_id
+    WHERE ar.game_id = $1
     AND ar.group_id = $2`;
     pool.query(query, queryParams)
         .then(result => {
@@ -28,18 +27,18 @@ router.post('/', (req, res) => {
     console.log("Inside POST /activity_responses");
     const userId = req.body.userId;
     const groupId = Number(req.body.groupId);
-    const activity_id = req.body.activity_id[0].id;
+    const gameId = req.body.gameId
     const start_time = req.body.start_time;
     const activityDate = req.body.date;
     const end_time = req.body.end_time;
 
-    console.log("userId=", userId, "groupId=", groupId, "activity_id=", activity_id, "date", activityDate, "start_time=", start_time, "end_time=", end_time);
+    console.log("userId=", userId, "groupId=", groupId, "gameId=", gameId, "date", activityDate, "start_time=", start_time, "end_time=", end_time);
 
     const queryText = `
-    INSERT INTO activity_responses (user_id, activity_id, "Date", "time_start", "time_end", group_id)
+    INSERT INTO activity_responses (user_id, game_id, "Date", "time_start", "time_end", group_id)
     VALUES (\$1, \$2, \$3, \$4, \$5, \$6)
   `;
-    const queryParams = [userId, activity_id, activityDate, start_time, end_time, groupId];
+    const queryParams = [userId, gameId, activityDate, start_time, end_time, groupId];
     console.log("QueryParams=", queryParams);
     pool.query(queryText, queryParams)
         .then((result) => {
@@ -55,18 +54,18 @@ router.delete('/', (req, res) => {
     console.log("Inside DELETE /activity_responses", req.body);
     const userId = req.body.userId;
     const groupId = Number(req.body.groupId);
-    const activity_id = req.body.activity_id[0].id;
+    const gameId = req.body.gameId;
     const activityDate = req.body.date;
 
-    console.log("userId=", userId, "groupId=", groupId, "activity_id=", activity_id, "date", activityDate);
+    console.log("userId=", userId, "groupId=", groupId, "gameId=", gameId, "date", activityDate);
 
     const queryText = `
     DELETE FROM activity_responses
     WHERE "Date" = $1
         AND user_id = $2
         AND group_id = $3 
-        AND activity_id = $4;`;
-    const queryParams = [activityDate, userId, groupId, activity_id];
+        AND game_id = $4;`;
+    const queryParams = [activityDate, userId, groupId, gameId];
     console.log("QueryParams=", queryParams);
     pool.query(queryText, queryParams)
         .then((result) => {

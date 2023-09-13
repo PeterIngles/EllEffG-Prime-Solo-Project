@@ -35,8 +35,8 @@ import AlertTitle from '@mui/material/AlertTitle';
 function ScheduleDayModal(prop) {
 
 
-  let date = prop.id;
-  // console.log("DATE", date)
+  let date = prop.id.date;
+  console.log("DATE", date)
 
   const style = {
     position: 'absolute',
@@ -73,8 +73,10 @@ function ScheduleDayModal(prop) {
   const [selectedEndTime, setSelectedEndTime] = useState({});
 
   let responseCheck = responses.find(response =>
-    response.Date == date && response.user_id === user.id
+    response.Date == date && response.user_id === user.id 
   );
+
+  console.log("RESPONSECHECK", responseCheck)
 
   let startHour = selectedStartTime.$H;
   let startMinute = String(selectedStartTime.$m).padStart(2, '0');
@@ -98,7 +100,7 @@ function ScheduleDayModal(prop) {
       type: 'ADD_RESPONSE', payload: {
         userId: user.id,
         groupId: groupId,
-        activity_id: activity,
+        gameId: gameId,
         start_time: formattedStartTime,
         end_time: formattedEndTime,
         date: date
@@ -115,7 +117,7 @@ function ScheduleDayModal(prop) {
         date: date,
         userId: user.id,
         groupId: groupId,
-        activity_id: activity,
+        gameId: gameId,
 
       }
     })

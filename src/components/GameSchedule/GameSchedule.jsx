@@ -79,6 +79,8 @@ function GameSchedule(date) {
     history.push(`/gameschedule/${groupId}/${gameId}`)
 }
 
+console.log("RESPONSES", responses)
+
   return (
     <div id="user-sidebar" className="container">
       <Box sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
@@ -138,7 +140,7 @@ function GameSchedule(date) {
           <TableBody>
             <TableRow>
               <TableCell>Tuesday <GroupReadyAlert id={{date: dates[0], gameId}}/></TableCell>
-              <ScheduleDayModal id={dates[0]}/>
+              <ScheduleDayModal id={{date: dates[0], gameId: gameId}}/>
               {responses.map((response) => {
                 if (response.Date === "Tuesday") {
                   return (
@@ -156,7 +158,7 @@ function GameSchedule(date) {
 
             <TableRow >
               <TableCell>Wednesday <GroupReadyAlert id={{date: dates[1], gameId}}/></TableCell>
-              <ScheduleDayModal id={dates[1]}/>
+              <ScheduleDayModal id={{date: dates[1], gameId: gameId}}/>
               {responses.map((response) => {
                 if (response.Date === "Wednesday") {
                   return (
@@ -173,7 +175,7 @@ function GameSchedule(date) {
             </TableRow>
             <TableRow >
               <TableCell>Thursday <GroupReadyAlert id={{date: dates[2], gameId}}/></TableCell>
-              <ScheduleDayModal id={dates[2]}/>
+              <ScheduleDayModal id={{date: dates[2], gameId: gameId}}/>
               {responses.map((response) => {
                 if (response.Date === "Thursday") {
                   return (
@@ -190,7 +192,7 @@ function GameSchedule(date) {
             </TableRow>
             <TableRow >
               <TableCell>Friday <GroupReadyAlert id={{date: dates[3], gameId}}/></TableCell>
-              <ScheduleDayModal id={dates[3]}/>
+              <ScheduleDayModal id={{date: dates[3], gameId: gameId}}/>
               {responses.map((response) => {
                 if (response.Date === "Friday") {
                   return (
@@ -207,7 +209,7 @@ function GameSchedule(date) {
             </TableRow>
             <TableRow >
               <TableCell>Saturday <GroupReadyAlert id={{date: dates[4], gameId}}/></TableCell>
-              <ScheduleDayModal id={dates[4]}/>
+              <ScheduleDayModal id={{date: dates[4], gameId: gameId}}/>
               {responses.map((response) => {
                 if (response.Date === "Saturday") {
                   return (
@@ -224,9 +226,9 @@ function GameSchedule(date) {
             </TableRow>
             <TableRow >
               <TableCell>Sunday <GroupReadyAlert id={{date: dates[5], gameId}}/></TableCell>
-              <ScheduleDayModal id={dates[5]}/>
+              <ScheduleDayModal id={{date: dates[5], gameId: gameId}}/>
               {responses.map((response) => {
-                if (response.Date === "Sunday") {
+                if (response.Date === "Sunday" && response.game_id == gameId) {
                   return (
                     <React.Fragment key={response.id}>
                       <TableCell component="th" scope="row"></TableCell>
@@ -241,7 +243,7 @@ function GameSchedule(date) {
             </TableRow>
             <TableRow >
               <TableCell>Monday <GroupReadyAlert id={{date: dates[6], gameId}}/></TableCell>
-              <ScheduleDayModal id={dates[6]}/>
+              <ScheduleDayModal id={{date: dates[6], gameId: gameId}}/>
               {responses.map((response) => {
                 if (response.Date === "Monday") {
                   return (

@@ -28,7 +28,7 @@ function GroupReadyAlert(prop) {
 
 
   const renderContent = () => {
-    if (groupResponses == 6) {
+    if (groupResponses >= 6) {
       return (
         <Fab variant="extended" color="success">
           <Diversity3Icon sx={{ mr: 1 }} />
