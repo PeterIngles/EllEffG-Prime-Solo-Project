@@ -137,7 +137,7 @@ function GameSchedule(date) {
           </TableHead>
           <TableBody>
             <TableRow>
-              <TableCell>Tuesday <GroupReadyAlert/></TableCell>
+              <TableCell>Tuesday <GroupReadyAlert id={{date: dates[0], gameId}}/></TableCell>
               <ScheduleDayModal id={dates[0]}/>
               {responses.map((response) => {
                 if (response.Date === "Tuesday") {
@@ -155,7 +155,7 @@ function GameSchedule(date) {
             </TableRow>
 
             <TableRow >
-              <TableCell>Wednesday</TableCell>
+              <TableCell>Wednesday <GroupReadyAlert id={{date: dates[1], gameId}}/></TableCell>
               <ScheduleDayModal id={dates[1]}/>
               {responses.map((response) => {
                 if (response.Date === "Wednesday") {
@@ -172,7 +172,7 @@ function GameSchedule(date) {
               })}
             </TableRow>
             <TableRow >
-              <TableCell>Thursday</TableCell>
+              <TableCell>Thursday <GroupReadyAlert id={{date: dates[2], gameId}}/></TableCell>
               <ScheduleDayModal id={dates[2]}/>
               {responses.map((response) => {
                 if (response.Date === "Thursday") {
@@ -189,7 +189,7 @@ function GameSchedule(date) {
               })}
             </TableRow>
             <TableRow >
-              <TableCell>Friday</TableCell>
+              <TableCell>Friday <GroupReadyAlert id={{date: dates[3], gameId}}/></TableCell>
               <ScheduleDayModal id={dates[3]}/>
               {responses.map((response) => {
                 if (response.Date === "Friday") {
@@ -206,7 +206,7 @@ function GameSchedule(date) {
               })}
             </TableRow>
             <TableRow >
-              <TableCell>Saturday</TableCell>
+              <TableCell>Saturday <GroupReadyAlert id={{date: dates[4], gameId}}/></TableCell>
               <ScheduleDayModal id={dates[4]}/>
               {responses.map((response) => {
                 if (response.Date === "Saturday") {
@@ -223,7 +223,7 @@ function GameSchedule(date) {
               })}
             </TableRow>
             <TableRow >
-              <TableCell>Sunday</TableCell>
+              <TableCell>Sunday <GroupReadyAlert id={{date: dates[5], gameId}}/></TableCell>
               <ScheduleDayModal id={dates[5]}/>
               {responses.map((response) => {
                 if (response.Date === "Sunday") {
@@ -240,7 +240,7 @@ function GameSchedule(date) {
               })}
             </TableRow>
             <TableRow >
-              <TableCell>Monday</TableCell>
+              <TableCell>Monday <GroupReadyAlert id={{date: dates[6], gameId}}/></TableCell>
               <ScheduleDayModal id={dates[6]}/>
               {responses.map((response) => {
                 if (response.Date === "Monday") {

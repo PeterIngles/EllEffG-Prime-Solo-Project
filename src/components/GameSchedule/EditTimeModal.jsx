@@ -39,7 +39,7 @@ function EditTimeModal(props) {
   const [selectedStartTime, setSelectedStartTime] = useState({});
   const [selectedEndTime, setSelectedEndTime] = useState({});
 
-  console.log("Response", responses, "userid", user, "groupid", group, "activity", activity)
+  // console.log("Response", responses, "userid", user, "groupid", group, "activity", activity)
 
 
   let startHour = selectedStartTime.$H;
@@ -62,7 +62,7 @@ function EditTimeModal(props) {
 
 
   const editTimeResponse = () => {
-    console.log('Inside editTimeResponse');
+    // console.log('Inside editTimeResponse');
     // Dispatching edit action here
     dispatch({
       type: 'EDIT_RESPONSE', 
