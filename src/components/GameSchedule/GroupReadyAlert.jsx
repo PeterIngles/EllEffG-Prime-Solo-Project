@@ -12,30 +12,29 @@ function GroupReadyAlert(prop) {
 
   let { groupId, gameId } = useParams();
 
-  let test = false
-
   console.log("groupId", groupId, "gameId", gameId, "prop", prop)
 
-  const dispatch = useDispatch();
   const user = useSelector((store) => store.user);
   const responses = useSelector((store) => store.responses);
   const activity = useSelector((store) => store.activity);
   const group = useSelector((store) => store.group);
+  const games = useSelector((store) => store.games);
 
   let groupResponses = responses.filter((response) => response.group_id == groupId && response.Date == prop.id.date).length
-  
- console.log("❌❌", groupResponses)
+  let filteredGames = games.filter((game) => game.id == gameId);
+
+ console.log("❌❌", filteredGames[0].req_players)
 
 
   const renderContent = () => {
-    if (groupResponses >= 6) {
+    if (groupResponses == filteredGames[0].req_players) {
       return (
         <Fab variant="extended" color="success">
           <Diversity3Icon sx={{ mr: 1 }} />
           Group Ready
         </Fab>
       );
-    } else if (groupResponses >= 1 && groupResponses < 6) {
+    } else if (groupResponses >= 1 && groupResponses < filteredGames[0].req_players) {
       return (
       <Fab variant="extended">
         <ThumbsUpDownIcon sx={{ mr: 1 }} />

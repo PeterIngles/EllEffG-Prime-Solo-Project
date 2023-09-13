@@ -19,7 +19,6 @@ import Avatar from '@mui/material/Avatar';
 import MuiAlert from '@mui/material/Alert';
 import GroupsIcon from '@mui/icons-material/Groups';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
-import { useTheme } from '@mui/material/styles';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import ScheduleDayModal from './ScheduleDayModal';
 import EditTimeModal from './EditTimeModal';
@@ -127,7 +126,8 @@ console.log("RESPONSES", responses)
           <TableHead>
             <TableRow>
               <TableCell><div><h2>{game.title}</h2>
-                <img src={game.icon} alt={game.title} style={{ width: '5%', height: 'auto' }} />
+              <img src={game.icon} alt={game.title} style={{ width: '75px', height: '75px', objectFit: 'contain' }} />
+
                 <p>Reset Time: {game.reset}</p></div></TableCell>
               {activity.map((activity) => (
                 <TableCell key={activity.id} align="right">{activity.activity_name}</TableCell>

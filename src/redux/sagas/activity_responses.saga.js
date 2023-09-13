@@ -11,10 +11,15 @@ function* fetchGroupActivityResponses(action) {
       console.log('GET group activity_responses error');
     }
   }
-
+// ADDICH ON YIELD
 function* postResponse(action){
-    console.log('Inside postResponse SAGA, action.payload=', action.payload)
+   try{
+  console.log('Inside postResponse SAGA, action.payload=', action.payload)
     yield axios.post('/api/activity_responses', action.payload)
+    yield put({type: 'FETCH_GROUP_RESPONSES', payload: action.payload})}
+    catch{
+      console.log('POST group activity_responses error');
+    }
 }
 
 function* deleteResponse(action){

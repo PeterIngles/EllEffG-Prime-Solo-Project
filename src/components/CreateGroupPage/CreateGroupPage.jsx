@@ -76,6 +76,8 @@ function CreateGroupPage() {
                     '.MuiFormLabel-root': { color: '#ffffff' },
                     '.MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': { borderColor: '#ffffff' },
                 }}
+                InputProps={{
+                    style: {color: 'white'}}}
             />
             <Autocomplete
                 multiple
@@ -90,8 +92,11 @@ function CreateGroupPage() {
                         {...params}
                         label="Search games"
                         InputProps={{
+                            style: {color: 'white'},
+        
                             ...params.InputProps,
                             type: 'search',
+                            
                         }}
                         sx={{
                             '.MuiFormLabel-root': { color: '#ffffff' },
