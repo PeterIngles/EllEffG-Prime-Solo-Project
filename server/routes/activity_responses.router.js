@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool');
-const { actionChannel } = require('redux-saga/effects');
 
 router.get('/:id/id', (req, res) => {
     const groupId = req.query.groupId; // Access the groupId from the query parameters

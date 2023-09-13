@@ -1,6 +1,6 @@
-import React from 'react';
-import LogOutButton from '../LogOutButton/LogOutButton';
+import React, { useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory, useParams } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -8,11 +8,6 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
-import GroupsIcon from '@mui/icons-material/Groups';
-import GroupAddIcon from '@mui/icons-material/GroupAdd';
-import { useHistory } from 'react-router-dom'
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -20,11 +15,14 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { useTheme } from '@mui/material/styles';
-import ScheduleDayModal from './ScheduleDayModal';
 import Avatar from '@mui/material/Avatar';
 import MuiAlert from '@mui/material/Alert';
-import EditTimeModal from './EditTimeModal'
+import GroupsIcon from '@mui/icons-material/Groups';
+import GroupAddIcon from '@mui/icons-material/GroupAdd';
+import { useTheme } from '@mui/material/styles';
+import LogOutButton from '../LogOutButton/LogOutButton';
+import ScheduleDayModal from './ScheduleDayModal';
+import EditTimeModal from './EditTimeModal';
 import GroupReadyAlert from './GroupReadyAlert';
 
 function GameSchedule(date) {
@@ -46,7 +44,6 @@ function GameSchedule(date) {
   };
 
   const dispatch = useDispatch();
-  const theme = useTheme();
   const user = useSelector((store) => store.user);
   const group = useSelector((store) => store.group);
   const games = useSelector((store) => store.games)
