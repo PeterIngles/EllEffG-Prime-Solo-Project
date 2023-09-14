@@ -20,7 +20,7 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
   console.log("Inside GET group /players", req.params.id);
   const queryParams = [Number(req.params.id)]
-  const query = `SELECT username 
+  const query = `SELECT username, user_id 
   FROM "user" 
   JOIN "user_groups" 
   ON "user".id = "user_groups".user_id 
