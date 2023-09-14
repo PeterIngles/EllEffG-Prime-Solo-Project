@@ -28,12 +28,24 @@ function* postPlayers(action){
   yield axios.post('/api/players', action.payload)
 }
 
+function* fetchPlayers() {
+  try {
+    console.log("Inside fetchAllPlayers SAGA");
+    const players = yield axios.get('/api/players');
+    console.log('get all:', players.data);
+    yield put({ type: 'SET_ALL_PLAYERS', payload: players.data });
+  } catch {
+    console.log('get all players error');
+  }
+}
+
   
 
 function* playersSaga() {
     yield takeLatest('FETCH_PLAYERS', fetchAllPlayers);
     yield takeLatest('FETCH_GROUP_PLAYERS', fetchGroupPlayers)
     yield takeLatest('ADD_PLAYERS', postPlayers)
+    yield takeLatest('FETCH_ALL_PLAYERS', fetchPlayers)
   }
 
 

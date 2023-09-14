@@ -1,19 +1,25 @@
 import React from 'react';
 import { TextField, Autocomplete } from '@mui/material';
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 export function AddPlayers({ onPlayersChange }) {
 
     const [selectPlayers, setSelectPlayers] = useState([]);
     const players = useSelector((store) => store.players)
+    const allPlayers = useSelector ((store) => store.allPlayers)
+    const dispatch = useDispatch();
 
     const handleSelectionChange = (event, values) => {
         setSelectPlayers(values);
         onPlayersChange(values);
     };
 
-    
+    console.log("AssPlayers", allPlayers)
+
+    useEffect(() => {
+      dispatch({ type: 'FETCH_ALL_PLAYERS' })
+  }, []);
 
 
     return <Autocomplete
@@ -22,7 +28,7 @@ export function AddPlayers({ onPlayersChange }) {
         onChange={handleSelectionChange}
         id="search to add player"
         disableClearable
-        options={players.map((option) => ({ value: option.user_id, label: option.username }))}
+        options={allPlayers.map((option) => ({ value: option.user_id, label: option.username }))}
         getOptionLabel={(option) => option.label}
         renderInput={(params) => (
             <TextField
