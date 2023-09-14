@@ -28,7 +28,7 @@ export function AddPlayers({ onPlayersChange }) {
         onChange={handleSelectionChange}
         id="search to add player"
         disableClearable
-        options={allPlayers.map((option) => ({ value: option.user_id, label: option.username }))}
+        options={allPlayers.map((option) => ({ value: option.id, label: option.username }))}
         getOptionLabel={(option) => option.label}
         renderInput={(params) => (
             <TextField

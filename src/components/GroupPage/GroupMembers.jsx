@@ -29,6 +29,7 @@ const handlePlayersChange = (selectedPlayers) => {
 console.log("SelectedPlayers", selectedPlayers)
 
 const postPlayers = () => {
+    console.log("Clicked on ADDTOGROUP")
     dispatch({
         type: 'ADD_PLAYERS', payload: {
             selectedPlayers: selectedPlayers,
@@ -65,7 +66,7 @@ console.log("Players", players)
                 <AddPlayers onPlayersChange={handlePlayersChange} sx={{
                 alignItems: 'stretch'
             }}
-            ></AddPlayers><Button>ADD TO GROUP</Button>
+            ></AddPlayers><Button onClick={postPlayers}>ADD TO GROUP</Button>
                     <ListItem>
                         <ListItemButton>
                             <ListItemText>
