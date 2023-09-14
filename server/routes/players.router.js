@@ -35,4 +35,28 @@ router.get('/:id', (req, res) => {
     });
 });
 
+router.post('/', (req, res) => {
+  console.log("Inside POST /players")
+  const groupId = req.body.groupId
+  const userIds = req.body.selectedPlayers.map(players => players.value)
+
+  console.log("groupIds=", groupId, "userIds=", userIds)
+
+  const queryText = `
+    INSERT INTO user_groups (group_id, user_id)
+    VALUES (\$1, unnest(\$2::int[]))
+  `;
+  const queryParams = [groupId, userIds]
+  console.log("QueryParams=", queryParams)
+  pool.query(queryText, queryParams)
+    .then((result) => {
+      res.sendStatus(201);
+    })
+    .catch((error) => {
+      res.sendStatus(500);
+      console.log("ERROR on POST newGroup", req.body)
+    })
+});
+
+
 module.exports = router;

@@ -18,9 +18,13 @@ function CreateGroupPage() {
 
     const history = useHistory();
 
+    
+
     const [groupName, setGroupName] = useState('');
     const [selectGames, setSelectGames] = useState([]);
     const [selectedPlayers, setSelectedPlayers] = useState([]);
+
+    console.log("THESE PLAYER", selectedPlayers)
 
     const theme = createTheme({
         palette: {

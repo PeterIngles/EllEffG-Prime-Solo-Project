@@ -36,7 +36,7 @@ function UserPage() {
     console.log("Group ID is", id)
     console.log("Games=", games)
     dispatch({ type: 'FETCH_USER_GAMES', payload: id });
-    dispatch({type: 'FETCH_PLAYERS', payload: id})
+    dispatch({type: 'FETCH_GROUP_PLAYERS', payload: id})
   }, [id]);
 
   const toGameSchedule = (groupId, gameId) => {

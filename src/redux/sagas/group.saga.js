@@ -13,7 +13,7 @@ function* fetchUserGroups(action) {
   }
 
   function* postGroup(action){
-    console.log('Inside postGroup SAGA, action.payload=', action.payload)
+    console.log('Inside postgroups SAGA, action.payload=', action.payload)
     yield axios.post('/api/groups', action.payload)
 }
   

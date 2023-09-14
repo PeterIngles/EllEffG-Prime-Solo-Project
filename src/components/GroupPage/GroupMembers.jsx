@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import Box from '@mui/material/Box';
@@ -9,11 +9,34 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Button from '@mui/material/Button';
+import { AddPlayers } from './AddPlayer';
 
 function GroupMembers() {
 
+let { id } = useParams();
+id = Number(id)
+
+const dispatch = useDispatch();
 const user = useSelector((store) => store.user);
 const players = useSelector((store) => store.players)
+
+const [selectedPlayers, setSelectedPlayers] = useState([]);
+
+const handlePlayersChange = (selectedPlayers) => {
+    setSelectedPlayers(selectedPlayers);
+};
+
+console.log("SelectedPlayers", selectedPlayers)
+
+const postPlayers = () => {
+    dispatch({
+        type: 'ADD_PLAYERS', payload: {
+            selectedPlayers: selectedPlayers,
+            groupId: id
+        }
+    }
+    )
+}
 
 console.log("Players", players)
 
@@ -29,6 +52,7 @@ console.log("Players", players)
             <Typography>
             PLAYER LIST
         </Typography> 
+
             <Box sx={{
                 display: 'flex',
                 flexDirection: 'column',
@@ -38,6 +62,17 @@ console.log("Players", players)
             }}>
                 <nav aria-label="player-list">
                 <List>
+                <AddPlayers onPlayersChange={handlePlayersChange} sx={{
+                alignItems: 'stretch'
+            }}
+            ></AddPlayers><Button>ADD TO GROUP</Button>
+                    <ListItem>
+                        <ListItemButton>
+                            <ListItemText>
+
+                            </ListItemText>
+                        </ListItemButton>
+                    </ListItem>
       {players.map((player, index) => (
         <ListItem key={index} disablePadding>
           <ListItemButton>
