@@ -129,9 +129,6 @@ console.log("RESPONSES", responses)
               <img src={game.icon} alt={game.title} style={{ width: '75px', height: '75px', objectFit: 'contain' }} />
 
                 <p>Reset Time: {game.reset}</p></div></TableCell>
-              {activity.map((activity) => (
-                <TableCell key={activity.id} align="right">{activity.activity_name}</TableCell>
-              ))}
             </TableRow>
           </TableHead>
           <TableBody>

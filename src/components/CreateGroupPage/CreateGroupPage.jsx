@@ -8,6 +8,7 @@ import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import { SearchPlayers } from './SearchPlayers'
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { Box } from '@mui/material';
 
 function CreateGroupPage() {
 
@@ -23,11 +24,11 @@ function CreateGroupPage() {
 
     const theme = createTheme({
         palette: {
-          primary: {
-            main: '#ffffff',  // white color
-          },
+            primary: {
+                main: '#ffffff',  // white color
+            },
         },
-      });
+    });
 
 
     const handleSelectionChange = (event, values) => {
@@ -77,7 +78,8 @@ function CreateGroupPage() {
                     '.MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': { borderColor: '#ffffff' },
                 }}
                 InputProps={{
-                    style: {color: 'white'}}}
+                    style: { color: 'white' }
+                }}
             />
             <Autocomplete
                 multiple
@@ -92,24 +94,27 @@ function CreateGroupPage() {
                         {...params}
                         label="Search games"
                         InputProps={{
-                            style: {color: 'white'},
-        
+                            style: { color: 'white' },
+
                             ...params.InputProps,
                             type: 'search',
-                            
+
                         }}
                         sx={{
                             '.MuiFormLabel-root': { color: '#ffffff' },
                             '.MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': { borderColor: '#ffffff' },
+                            '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                                borderColor: 'white'
+                            }
                         }}
-            
+
                     />
                 )}
             />
-            <SearchPlayers onPlayersChange={handlePlayersChange} 
-            />
+            <Box sx={{ padding: 1 }} />
+            <SearchPlayers onPlayersChange={handlePlayersChange} />
+            <Box sx={{ padding: 1 }} />
 
-            <PersonAddIcon />
             <Button onClick={postGroup} variant="contained" endIcon={<GroupAddIcon />}>
                 ADD GROUP
             </Button>

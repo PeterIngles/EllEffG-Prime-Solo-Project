@@ -4,14 +4,14 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 
 export function SearchPlayers({ onPlayersChange }) {
-    
+
     const [selectPlayers, setSelectPlayers] = useState([]);
     const players = useSelector((store) => store.players)
 
     const handleSelectionChange = (event, values) => {
         setSelectPlayers(values);
         onPlayersChange(values);
-      };
+    };
 
 
     return <Autocomplete
@@ -21,7 +21,7 @@ export function SearchPlayers({ onPlayersChange }) {
         id="search to add player"
         disableClearable
         options={players.map((option) => ({ value: option.id, label: option.username }))}
-                getOptionLabel={(option) => option.label}
+        getOptionLabel={(option) => option.label}
         renderInput={(params) => (
             <TextField
                 {...params}
@@ -29,10 +29,15 @@ export function SearchPlayers({ onPlayersChange }) {
                 InputProps={{
                     ...params.InputProps,
                     type: 'search',
-                }} 
+                    style: { color: 'white' }
+                }}
                 sx={{
+                    '.MuiButtonBase-root-MuiChip-root': {backgroundColor: 'white'},
                     '.MuiFormLabel-root': { color: '#ffffff' },
                     '.MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': { borderColor: '#ffffff' },
-                }}/>
+                    '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                        borderColor: 'white'
+                      }
+                }} />
         )} />;
 }
