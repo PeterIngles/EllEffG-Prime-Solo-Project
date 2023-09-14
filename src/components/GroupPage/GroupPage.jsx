@@ -27,7 +27,6 @@ function UserPage() {
 
   const [showPlayers, setShowPlayers] = React.useState(false);
 
-  
 
   let { id } = useParams();
   id = Number(id)

@@ -9,6 +9,7 @@ import { SearchPlayers } from './SearchPlayers'
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Box } from '@mui/material';
+import Chip from '@mui/material/Chip';
 
 function CreateGroupPage() {
 
@@ -85,36 +86,44 @@ function CreateGroupPage() {
                     style: { color: 'white' }
                 }}
             />
-            <Autocomplete
-                multiple
-                value={selectGames}
-                onChange={handleSelectionChange}
-                id="search to add player"
-                disableClearable
-                options={games.map((option) => ({ value: option.id, label: option.title }))}
-                getOptionLabel={(option) => option.label}
-                renderInput={(params) => (
-                    <TextField
-                        {...params}
-                        label="Search games"
-                        InputProps={{
-                            style: { color: 'white' },
-
-                            ...params.InputProps,
-                            type: 'search',
-
-                        }}
-                        sx={{
-                            '.MuiFormLabel-root': { color: '#ffffff' },
-                            '.MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': { borderColor: '#ffffff' },
-                            '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                                borderColor: 'white'
-                            }
-                        }}
-
-                    />
-                )}
-            />
+           <Autocomplete
+  multiple
+  value={selectGames}
+  onChange={handleSelectionChange}
+  id="search to add player"
+  disableClearable
+  options={games.map((option) => ({ value: option.id, label: option.title }))}
+  getOptionLabel={(option) => option.label}
+  renderInput={(params) => (
+    <TextField
+      {...params}
+      label="Search games"
+      InputProps={{
+        style: { color: 'white' },
+        ...params.InputProps,
+        type: 'search',
+      }}
+      sx={{
+        '.MuiFormLabel-root': { color: '#ffffff' },
+        '.MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
+          borderColor: '#ffffff',
+        },
+        '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+          borderColor: 'white',
+        },
+      }}
+    />
+  )}
+  renderTags={(value, getTagProps) =>
+    value.map((option, index) => (
+      <Chip
+        label={option.label}
+        {...getTagProps({ index })}
+        sx={{ backgroundColor: 'rgb(64,60,61)', color: 'white' }}
+      />
+    ))
+  }
+/>
             <Box sx={{ padding: 1 }} />
             <SearchPlayers onPlayersChange={handlePlayersChange} />
             <Box sx={{ padding: 1 }} />

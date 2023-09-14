@@ -75,6 +75,9 @@ function GameSchedule(date) {
     history.push(`/gameschedule/${groupId}/${gameId}`)
 }
 
+const toGroupMembers = () => {
+  history.push(`/group/${groupId}`)
+}
 console.log("RESPONSES", responses)
 
   return (
@@ -108,14 +111,6 @@ console.log("RESPONSES", responses)
         <Divider />
         <nav aria-label="create options">
           <List>
-            <ListItem disablePadding>
-              <ListItemButton >
-                <ListItemIcon>
-                  <GroupAddIcon />
-                </ListItemIcon>
-                <ListItemText primary="Group Members" />
-              </ListItemButton>
-            </ListItem>
           </List>
         </nav>
       </Box>
