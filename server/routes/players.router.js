@@ -58,5 +58,27 @@ router.post('/', (req, res) => {
     })
 });
 
+router.delete('/', (req, res) => {
+  console.log("Inside DELETE /player", req.body)
+  const groupId = req.body.groupId
+  const userId = req.body.userId
+
+  console.log("groupIds=", groupId, "userIds=", userId)
+
+  const queryText = `
+  DELETE FROM "user_groups" 
+  WHERE "user_id" = $1 AND "group_id" = $2;
+  `;
+  const queryParams = [userId, groupId]
+  console.log("QueryParams=", queryParams)
+  pool.query(queryText, queryParams)
+    .then((result) => {
+      res.sendStatus(201);
+    })
+    .catch((error) => {
+      res.sendStatus(500);
+      console.log("ERROR on DELETE newGroup", req.body)
+    })
+});
 
 module.exports = router;

@@ -23,6 +23,16 @@ function* fetchAllPlayers() {
     }
 }
 
+function* deletePlayers(action) {
+  try{
+    console.log("Inside deletePlayer SAGA", action.payload);
+    yield axios.delete(`/api/players`, {data: action.payload})
+    yield put({ type: 'FETCH_GROUP_PLAYERS'})}
+  catch{
+    console.log('DELETE player error')
+  }
+}
+
 function* postPlayers(action){
   console.log('Inside postPlayers SAGA, action.payload=', action.payload)
   yield axios.post('/api/players', action.payload)
@@ -46,6 +56,7 @@ function* playersSaga() {
     yield takeLatest('FETCH_GROUP_PLAYERS', fetchGroupPlayers)
     yield takeLatest('ADD_PLAYERS', postPlayers)
     yield takeLatest('FETCH_ALL_PLAYERS', fetchPlayers)
+    yield takeLatest('DELETE_PLAYER', deletePlayers)
   }
 
 

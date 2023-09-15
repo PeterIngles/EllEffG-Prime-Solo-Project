@@ -10,6 +10,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Button from '@mui/material/Button';
 import { AddPlayers } from './AddPlayer';
+import DeletePlayerModal from './DeletePlayerModal';
 
 function GroupMembers() {
 
@@ -80,7 +81,7 @@ console.log("Players", players)
             <ListItemText primary={player.username} />
           </ListItemButton>
           {player.user_id === user.id ? (
-            <Button>LEAVE GROUP</Button>
+            <DeletePlayerModal/>
           ) : null}
         </ListItem>
       ))}
