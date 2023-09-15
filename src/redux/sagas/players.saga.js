@@ -27,7 +27,7 @@ function* deletePlayers(action) {
   try{
     console.log("Inside deletePlayer SAGA", action.payload);
     yield axios.delete(`/api/players`, {data: action.payload})
-    yield put({ type: 'FETCH_GROUP_PLAYERS'})}
+    yield put({ type: 'FETCH_GROUPS'})}
   catch{
     console.log('DELETE player error')
   }
