@@ -67,7 +67,7 @@ function CreateGroupPage() {
     }, []);
 
     return (
-        <div id="create-group-form">
+        <div style={{padding: '1em' }} id="create-group-form">
             <h1>CREATE GROUP PAGE</h1>
             <ul></ul>
             <TextField
