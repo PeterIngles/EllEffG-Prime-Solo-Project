@@ -149,7 +149,7 @@ function ScheduleDayModal(prop) {
               <Box sx={style}>
                 <Typography id="SignUp" variant="h6" component="h2">
                   Sign up for {date}?
-                </Typography>wd
+                </Typography>
                 <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <TimePicker label="Start time picker"

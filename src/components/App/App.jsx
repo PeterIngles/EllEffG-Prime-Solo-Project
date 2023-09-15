@@ -29,8 +29,11 @@ import CreateGroupPage from '../CreateGroupPage/CreateGroupPage';
 
 function App() {
   const theme = createTheme({
+    palette: {
+      mode: 'dark',
+    },
     components: {
-      MuiTimePicker:{
+      MuiTimePicker: {
         styleOverrides: {
           root: {
             color: "white"
