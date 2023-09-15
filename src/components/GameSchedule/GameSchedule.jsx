@@ -18,11 +18,10 @@ import Paper from '@mui/material/Paper';
 import Avatar from '@mui/material/Avatar';
 import MuiAlert from '@mui/material/Alert';
 import GroupsIcon from '@mui/icons-material/Groups';
-import GroupAddIcon from '@mui/icons-material/GroupAdd';
-import LogOutButton from '../LogOutButton/LogOutButton';
 import ScheduleDayModal from './ScheduleDayModal';
 import EditTimeModal from './EditTimeModal';
 import GroupReadyAlert from './GroupReadyAlert';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 function GameSchedule(date) {
 
@@ -91,7 +90,7 @@ console.log("RESPONSES", responses)
                   <GroupsIcon />
                 </ListItemIcon>
                 <ListItemText primary={group.find(group => group.id == groupId)?.group_name || 'Not found'} />
-
+                <ArrowBackIcon/>
               </ListItemButton>
             </ListItem>
           {games.map((game) => (
@@ -127,15 +126,15 @@ console.log("RESPONSES", responses)
             </TableRow>
           </TableHead>
           <TableBody>
-            <TableRow>
-              <TableCell>Tuesday <GroupReadyAlert id={{date: dates[0], gameId}}/></TableCell>
+          <TableRow sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end' }}>
+              <TableCell sx={{ display: 'flex', flexDirection: 'column', flexWrap: 'wrap', alignContent: 'stretch', alignItems: 'center'}}>Tuesday <GroupReadyAlert id={{date: dates[0], gameId}}/></TableCell>
               <ScheduleDayModal id={{date: dates[0], gameId: gameId}}/>
               {responses.map((response) => {
                 if (response.Date === "Tuesday") {
                   return (
                     <React.Fragment key={response.id}>
                       <TableCell component="th" scope="row"></TableCell>
-                      <TableCell align="right">{response.username}</TableCell>
+                      <TableCell sx={{ display: 'flex', flexDirection: 'column', flexWrap: 'wrap', alignContent: 'stretch', alignItems: 'center'}}align="right">{response.username}</TableCell>
                       <TableCell align="right">{response.time_start} </TableCell>
                       <TableCell align="right">{response.time_end}</TableCell><EditTimeModal prop={ {id: response.user_id, date: dates[0]} } />
                     </React.Fragment>
@@ -145,7 +144,7 @@ console.log("RESPONSES", responses)
               })}
             </TableRow>
 
-            <TableRow >
+            <TableRow sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end' }}>
               <TableCell>Wednesday <GroupReadyAlert id={{date: dates[1], gameId}}/></TableCell>
               <ScheduleDayModal id={{date: dates[1], gameId: gameId}}/>
               {responses.map((response) => {
@@ -162,7 +161,7 @@ console.log("RESPONSES", responses)
                 return null; // Return null when the condition is not met
               })}
             </TableRow>
-            <TableRow >
+            <TableRow sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end' }}>
               <TableCell>Thursday <GroupReadyAlert id={{date: dates[2], gameId}}/></TableCell>
               <ScheduleDayModal id={{date: dates[2], gameId: gameId}}/>
               {responses.map((response) => {
@@ -179,7 +178,7 @@ console.log("RESPONSES", responses)
                 return null; // Return null when the condition is not met
               })}
             </TableRow>
-            <TableRow >
+            <TableRow sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end' }}>
               <TableCell>Friday <GroupReadyAlert id={{date: dates[3], gameId}}/></TableCell>
               <ScheduleDayModal id={{date: dates[3], gameId: gameId}}/>
               {responses.map((response) => {
@@ -196,7 +195,7 @@ console.log("RESPONSES", responses)
                 return null; // Return null when the condition is not met
               })}
             </TableRow>
-            <TableRow >
+            <TableRow sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end' }}>
               <TableCell>Saturday <GroupReadyAlert id={{date: dates[4], gameId}}/></TableCell>
               <ScheduleDayModal id={{date: dates[4], gameId: gameId}}/>
               {responses.map((response) => {
@@ -213,7 +212,7 @@ console.log("RESPONSES", responses)
                 return null; // Return null when the condition is not met
               })}
             </TableRow>
-            <TableRow >
+            <TableRow sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end' }}>
               <TableCell>Sunday <GroupReadyAlert id={{date: dates[5], gameId}}/></TableCell>
               <ScheduleDayModal id={{date: dates[5], gameId: gameId}}/>
               {responses.map((response) => {
@@ -230,7 +229,7 @@ console.log("RESPONSES", responses)
                 return null; // Return null when the condition is not met
               })}
             </TableRow>
-            <TableRow >
+            <TableRow sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end' }}>
               <TableCell>Monday <GroupReadyAlert id={{date: dates[6], gameId}}/></TableCell>
               <ScheduleDayModal id={{date: dates[6], gameId: gameId}}/>
               {responses.map((response) => {
@@ -250,10 +249,6 @@ console.log("RESPONSES", responses)
           </TableBody>
         </Table>
       </TableContainer>
-      
-      <h2>Welcome, {user.username}!</h2>
-      <p>Your ID is: {user.id}</p>
-      <LogOutButton className="btn" />
     </div>
 
   );
