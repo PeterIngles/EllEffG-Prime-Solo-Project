@@ -129,8 +129,8 @@ function UserPage() {
 
   return (
     <div>
-      <div id="user-sidebar" className="container">
-        <Box sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+      <div id="user-sidebar" className="container" style={{ display: 'flex', padding: '0' }}>
+        <Box sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }} >
           <nav aria-label="user routes">
             <List>
               <ListItem disablePadding>

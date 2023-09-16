@@ -80,8 +80,8 @@ const toGroupMembers = () => {
 console.log("RESPONSES", responses)
 
   return (
-    <div id="user-sidebar" className="container">
-      <Box sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+    <div id="user-sidebar" className="container" style={{ padding: '0' }}>
+      <Box disablePadding sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
         <nav aria-label="user routes">
           <List>
             <ListItem disablePadding>

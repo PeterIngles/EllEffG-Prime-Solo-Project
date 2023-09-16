@@ -56,7 +56,8 @@ function UserPage() {
         flexFlow: 'column wrap',
         justifyContent: 'flex-start',
         alignItems: 'baseline',
-        flexDirection: 'row'
+        flexDirection: 'row',
+        padding: '0' 
       }}>
         <Box sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
           <nav aria-label="user routes">

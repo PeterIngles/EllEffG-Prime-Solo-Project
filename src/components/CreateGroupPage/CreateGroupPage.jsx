@@ -68,7 +68,7 @@ function CreateGroupPage() {
 
     return (
         <div style={{padding: '1em' }} id="create-group-form">
-            <h1>CREATE GROUP PAGE</h1>
+            <h1>CREATE GROUP</h1>
             <ul></ul>
             <TextField
                 onChange={handleGroupNameChange}
@@ -86,6 +86,7 @@ function CreateGroupPage() {
                     style: { color: 'white' }
                 }}
             />
+            
            <Autocomplete
   multiple
   value={selectGames}
