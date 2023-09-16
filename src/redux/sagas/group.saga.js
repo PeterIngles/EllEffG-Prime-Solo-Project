@@ -12,15 +12,21 @@ function* fetchUserGroups(action) {
     }
   }
 
-  function* postGroup(action){
-    console.log('Inside postgroups SAGA, action.payload=', action.payload)
-    yield axios.post('/api/groups', action.payload)
-}
+  function* postGroup(action) {
+    try {
+      console.log('Inside postgroups SAGA, action.payload=', action.payload);
+      yield axios.post('/api/groups', action.payload);
+
+    } catch {
+      console.log('post group error');
+    }
+  }
   
 
 function* groupsSaga() {
     yield takeLatest('FETCH_GROUPS', fetchUserGroups);
     yield takeLatest('ADD_GROUP', postGroup)
+
   }
 
 

@@ -24,8 +24,8 @@ function CreateGroupPage() {
     const [groupName, setGroupName] = useState('');
     const [selectGames, setSelectGames] = useState([]);
     const [selectedPlayers, setSelectedPlayers] = useState([]);
+    
 
-    console.log("THESE PLAYER", selectedPlayers)
 
     const theme = createTheme({
         palette: {
@@ -58,6 +58,7 @@ function CreateGroupPage() {
             }
         }
         )
+        history.push('/user')
     }
 
     useEffect(() => {
@@ -71,6 +72,7 @@ function CreateGroupPage() {
             <h1>CREATE GROUP</h1>
             <ul></ul>
             <TextField
+                fullWidth
                 onChange={handleGroupNameChange}
                 value={groupName}
                 required
@@ -93,6 +95,9 @@ function CreateGroupPage() {
   onChange={handleSelectionChange}
   id="search to add player"
   disableClearable
+  sx={{
+    paddingTop: '1em'
+  }}
   options={games.map((option) => ({ value: option.id, label: option.title }))}
   getOptionLabel={(option) => option.label}
   renderInput={(params) => (

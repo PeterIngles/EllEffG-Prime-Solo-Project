@@ -82,10 +82,6 @@ function Nav() {
                   eLL-eFF-G
                 </Typography>
               </Link>
-
-              <Link className="navLink" to="/about">
-                About
-              </Link>
             </Toolbar>
           </AppBar>
         </Box>

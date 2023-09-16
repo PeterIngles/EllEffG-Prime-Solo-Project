@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
@@ -27,6 +27,8 @@ function UserPage() {
   const history = useHistory();
 
   const userResponses = useSelector((store => store.userResponses))
+  const groups = useSelector((store) => store.groups);
+
   const tueFilteredResponses = userResponses.filter(response => response.Date === "Tuesday");
   const wedFilteredResponses = userResponses.filter(response => response.Date === "Wednesday");
   const thurFilteredResponses = userResponses.filter(response => response.Date === "Thursday");
@@ -36,6 +38,8 @@ function UserPage() {
   const monFilteredResponses = userResponses.filter(response => response.Date === "Monday");
 
   const [view, setView] = useState('groups');
+
+  
 
   const images = {
     url: '/images/GroupsBackground.jpeg',
@@ -126,6 +130,10 @@ function UserPage() {
     dispatch({type: 'FETCH_USER_ACTIVITY_RESPONSES', payload: user.id})
     setView('userSchedule');
   }
+
+  useEffect(() => {
+    dispatch({ type: 'FETCH_GROUPS' });
+}, [groups]);
 
   return (
     <div>
