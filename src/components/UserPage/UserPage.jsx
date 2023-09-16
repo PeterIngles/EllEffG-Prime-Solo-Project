@@ -27,7 +27,13 @@ function UserPage() {
   const history = useHistory();
 
   const userResponses = useSelector((store => store.userResponses))
-  const filteredResponses = userResponses.filter(response => response.Date === "Tuesday");
+  const tueFilteredResponses = userResponses.filter(response => response.Date === "Tuesday");
+  const wedFilteredResponses = userResponses.filter(response => response.Date === "Wednesday");
+  const thurFilteredResponses = userResponses.filter(response => response.Date === "Thursday");
+  const friFilteredResponses = userResponses.filter(response => response.Date === "Friday");
+  const satFilteredResponses = userResponses.filter(response => response.Date === "Saturday");
+  const sunFilteredResponses = userResponses.filter(response => response.Date === "Sunday");
+  const monFilteredResponses = userResponses.filter(response => response.Date === "Monday");
 
   const [view, setView] = useState('groups');
 
@@ -199,7 +205,13 @@ function UserPage() {
             ))}
           </React.Fragment>
         ) : (
-          <UserSchedule  filteredResponses={filteredResponses} />
+          <UserSchedule filteredResponsesTue={tueFilteredResponses} 
+                    filteredResponsesWed={wedFilteredResponses}
+                    filteredResponsesThur={thurFilteredResponses}
+                    filteredResponsesFri={friFilteredResponses}
+                    filteredResponsesSat={satFilteredResponses}
+                    filteredResponsesSun={sunFilteredResponses}
+                    filteredResponsesMon={monFilteredResponses} />
         )}
       </div>
     </div>

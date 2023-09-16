@@ -15,15 +15,17 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import Avatar from '@mui/material/Avatar';
 import MuiAlert from '@mui/material/Alert';
-import GroupsIcon from '@mui/icons-material/Groups';
-import ScheduleDayModal from '../GameSchedule/ScheduleDayModal';
-import EditTimeModal from '../GameSchedule/EditTimeModal';
-import GroupReadyAlert from '../GameSchedule/GroupReadyAlert';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
-function UserSchedule({ filteredResponses }) {
+function UserSchedule({ 
+  filteredResponsesTue,
+  filteredResponsesWed,
+  filteredResponsesThur,
+  filteredResponsesFri,
+  filteredResponsesSat,
+  filteredResponsesSun,
+  filteredResponsesMon 
+}) {
 
   const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -99,7 +101,61 @@ function UserSchedule({ filteredResponses }) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {filteredResponses.map((response, index) => (
+          {filteredResponsesTue.map((response, index) => (
+            <TableRow key={index}>
+              <TableCell>{response.Date}</TableCell>
+              <TableCell align="right">{response.group_name}</TableCell>
+              <TableCell align="right">{response.game_title}</TableCell>
+              <TableCell align="right">{response.time_start}</TableCell>
+              <TableCell align="right">{response.time_end}</TableCell>
+            </TableRow>
+          ))}
+          {filteredResponsesWed.map((response, index) => (
+            <TableRow key={index}>
+              <TableCell>{response.Date}</TableCell>
+              <TableCell align="right">{response.group_name}</TableCell>
+              <TableCell align="right">{response.game_title}</TableCell>
+              <TableCell align="right">{response.time_start}</TableCell>
+              <TableCell align="right">{response.time_end}</TableCell>
+            </TableRow>
+          ))}
+          {filteredResponsesThur.map((response, index) => (
+            <TableRow key={index}>
+              <TableCell>{response.Date}</TableCell>
+              <TableCell align="right">{response.group_name}</TableCell>
+              <TableCell align="right">{response.game_title}</TableCell>
+              <TableCell align="right">{response.time_start}</TableCell>
+              <TableCell align="right">{response.time_end}</TableCell>
+            </TableRow>
+          ))}
+          {filteredResponsesFri.map((response, index) => (
+            <TableRow key={index}>
+              <TableCell>{response.Date}</TableCell>
+              <TableCell align="right">{response.group_name}</TableCell>
+              <TableCell align="right">{response.game_title}</TableCell>
+              <TableCell align="right">{response.time_start}</TableCell>
+              <TableCell align="right">{response.time_end}</TableCell>
+            </TableRow>
+          ))}
+          {filteredResponsesSat.map((response, index) => (
+            <TableRow key={index}>
+              <TableCell>{response.Date}</TableCell>
+              <TableCell align="right">{response.group_name}</TableCell>
+              <TableCell align="right">{response.game_title}</TableCell>
+              <TableCell align="right">{response.time_start}</TableCell>
+              <TableCell align="right">{response.time_end}</TableCell>
+            </TableRow>
+          ))}
+          {filteredResponsesSun.map((response, index) => (
+            <TableRow key={index}>
+              <TableCell>{response.Date}</TableCell>
+              <TableCell align="right">{response.group_name}</TableCell>
+              <TableCell align="right">{response.game_title}</TableCell>
+              <TableCell align="right">{response.time_start}</TableCell>
+              <TableCell align="right">{response.time_end}</TableCell>
+            </TableRow>
+          ))}
+          {filteredResponsesMon.map((response, index) => (
             <TableRow key={index}>
               <TableCell>{response.Date}</TableCell>
               <TableCell align="right">{response.group_name}</TableCell>
