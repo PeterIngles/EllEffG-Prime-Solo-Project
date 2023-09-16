@@ -11,6 +11,18 @@ function* fetchGroupActivityResponses(action) {
       console.log('GET group activity_responses error');
     }
   }
+
+  function* fetchUserActivityResponses(action) {
+    try {
+      console.log("Inside fetchUserActivtyResponses SAGA. action.payload=", action.payload);
+      const responses = yield axios.get('/api/activity_responses/', { params: action.payload });
+      console.log('get all group activity_responses:', responses.data);
+      yield put({ type: 'SET_USER_ACTIVITY_RESPONSES', payload: responses.data });
+    } catch {
+      console.log('GET group activity_responses error');
+    }
+  }
+
 // ADDICH ON YIELD
 function* postResponse(action){
    try{
@@ -46,6 +58,7 @@ function* editResponse(action){
 
 function* activity_responsesSaga() {
     yield takeLatest('FETCH_GROUP_RESPONSES', fetchGroupActivityResponses);
+    yield takeLatest('FETCH_USER_ACTIVITY_RESPONSES', fetchUserActivityResponses)
     yield takeLatest('ADD_RESPONSE', postResponse)
     yield takeLatest('DELETE_RESPONSE', deleteResponse)
     yield takeLatest('EDIT_RESPONSE', editResponse)

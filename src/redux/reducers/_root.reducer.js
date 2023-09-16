@@ -7,6 +7,7 @@ import players from './players.reducer'
 import responses from './activity_responses.reducer'
 import activity from './activity.reducer'
 import allPlayers from './allPlayers.reducer'
+import userResponses from './user_activity_responses'
 
 
 
@@ -24,7 +25,8 @@ const rootReducer = combineReducers({
   players,
   responses,
   activity,
-  allPlayers
+  allPlayers,
+  userResponses
 });
 
 export default rootReducer;

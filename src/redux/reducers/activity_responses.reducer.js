@@ -3,6 +3,8 @@ const activity_responsesReducer = (state = [], action) => {
     switch (action.type) {
         case 'SET_GROUP_ACTIVITY_RESPONSES':
             return action.payload;
+        case 'SET_USER_ACTIVITY_RESPONSES':
+          return action.payload
         default:
             return state;
     }

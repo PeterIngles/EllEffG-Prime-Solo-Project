@@ -22,6 +22,34 @@ router.get('/:id/id', (req, res) => {
         })
 });
 
+router.get('/', (req, res) => {
+    const userId = req.query.userId;
+    console.log("Inside GET user /activity_responses/ req.query", req.query)
+    const queryParams = [userId];
+    const query = `SELECT 
+    g.title AS game_title,
+    activity_responses."Date",
+    activity_responses.time_start,
+    activity_responses.time_end,
+    grp.group_name
+FROM 
+    activity_responses
+JOIN 
+    games g ON activity_responses.game_id = g.id
+JOIN 
+    groups grp ON activity_responses.group_id = grp.id
+WHERE 
+    activity_responses.user_id = $1;`;
+    pool.query(query, queryParams)
+        .then(result => {
+            res.send(result.rows);
+        })
+        .catch(err => {
+            console.log('ERROR: Get activity_responses/id groups', err);
+            res.sendStatus(500)
+        })
+});
+
 router.post('/', (req, res) => {
     console.log("Inside POST /activity_responses");
     const userId = req.body.userId;
@@ -102,6 +130,8 @@ WHERE group_id = $3 AND "Date" = $4 AND user_id = $5;
             console.log("ERROR on PUT activityResponse", req.body);
         });
 });
+
+
 
 
 
