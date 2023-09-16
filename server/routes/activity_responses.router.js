@@ -23,8 +23,8 @@ router.get('/:id/id', (req, res) => {
 });
 
 router.get('/', (req, res) => {
-    const userId = req.query.userId;
-    console.log("Inside GET user /activity_responses/ req.query", req.query)
+    const userId = req.query[0];
+    console.log("Inside GET user /activity_responses/ req.query", req.query[0])
     const queryParams = [userId];
     const query = `SELECT 
     g.title AS game_title,

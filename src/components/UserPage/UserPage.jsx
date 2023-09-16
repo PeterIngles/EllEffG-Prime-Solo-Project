@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import LogOutButton from '../LogOutButton/LogOutButton';
 import { useDispatch, useSelector } from 'react-redux';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
@@ -26,6 +25,9 @@ function UserPage() {
   const user = useSelector((store) => store.user);
   const group = useSelector((store) => store.group);
   const history = useHistory();
+
+  const userResponses = useSelector((store => store.userResponses))
+  const filteredResponses = userResponses.filter(response => response.Date === "Tuesday");
 
   const [view, setView] = useState('groups');
 
@@ -115,6 +117,7 @@ function UserPage() {
   }
 
   const toUserSchedule = () => {
+    dispatch({type: 'FETCH_USER_ACTIVITY_RESPONSES', payload: user.id})
     setView('userSchedule');
   }
 
@@ -196,7 +199,7 @@ function UserPage() {
             ))}
           </React.Fragment>
         ) : (
-          <UserSchedule />
+          <UserSchedule  filteredResponses={filteredResponses} />
         )}
       </div>
     </div>

@@ -1,4 +1,4 @@
-import React, { useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import Box from '@mui/material/Box';
@@ -23,7 +23,7 @@ import EditTimeModal from '../GameSchedule/EditTimeModal';
 import GroupReadyAlert from '../GameSchedule/GroupReadyAlert';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
-function UserSchedule(date) {
+function UserSchedule({ filteredResponses }) {
 
   const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -47,6 +47,7 @@ function UserSchedule(date) {
   const games = useSelector((store) => store.games)
   const responses = useSelector((store) => store.responses)
   const activity = useSelector((store => store.activity))
+  const userResponses = useSelector((store => store.userResponses))
 
   const history = useHistory();
 
@@ -54,7 +55,10 @@ function UserSchedule(date) {
 
   const dates = ["Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Monday"]
 
-  console.log("UserId", user.id, "GroupId is", groupId, "gameId is", gameId, "Response are", responses, "Activites are", activity)
+  // console.log("UserId", user.id, "GroupId is", groupId, "gameId is", gameId, "Response are", responses, "Activites are", activity)
+
+  console.log("userResponses", userResponses)
+
 
   const game = games.find((game) => game.id == gameId);
 
@@ -70,49 +74,48 @@ function UserSchedule(date) {
   const toGameSchedule = (gameId) => {
     // console.log("clicked on")
     history.push(`/gameschedule/${groupId}/${gameId}`)
-}
+  }
 
-let rows = ["Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Monday"]
+  let rows = ["Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Monday"]
 
-const toGroupMembers = () => {
-  history.push(`/group/${groupId}`)
-}
-console.log("RESPONSES", responses)
+  const toGroupMembers = () => {
+    history.push(`/group/${groupId}`)
+  }
+  console.log("RESPONSES", responses)
+
+
+
 
   return (
-  <TableContainer component={Paper}>
-  <Table sx={{ minWidth: 650 }} aria-label="simple table">
-    <TableHead>
-      <TableRow>
-        <TableCell></TableCell>
-        <TableCell align="right"></TableCell>
-        <TableCell align="right"></TableCell>
-        <TableCell align="right"></TableCell>
-        <TableCell align="right"></TableCell>
-      </TableRow>
-    </TableHead>
-    <TableBody>
-      {rows.map((row) => (
-        <TableRow
-          sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-        >
-          <TableCell component="th" scope="row">
-            {row}
-          </TableCell>
-          <TableCell align="right"></TableCell>
-          <TableCell align="right"></TableCell>
-          <TableCell align="right"></TableCell>
-          <TableCell align="right"></TableCell>
-        </TableRow>
-      ))}
-    </TableBody>
-  </Table>
-</TableContainer>
-);
-   
-   
+    <TableContainer component={Paper}>
+      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell>Date</TableCell>
+            <TableCell align="right">Group Name</TableCell>
+            <TableCell align="right">Game Title</TableCell>
+            <TableCell align="right">Time Start</TableCell>
+            <TableCell align="right">Time End</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {filteredResponses.map((response, index) => (
+            <TableRow key={index}>
+              <TableCell>{response.Date}</TableCell>
+              <TableCell align="right">{response.group_name}</TableCell>
+              <TableCell align="right">{response.game_title}</TableCell>
+              <TableCell align="right">{response.time_start}</TableCell>
+              <TableCell align="right">{response.time_end}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
 
-  
+
+
+
 }
 
 // this allows us to use <App /> in index.js
