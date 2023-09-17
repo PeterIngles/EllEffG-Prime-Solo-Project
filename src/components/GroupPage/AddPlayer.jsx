@@ -16,7 +16,7 @@ export function AddPlayers({ onPlayersChange }) {
 
     useEffect(() => {
         dispatch({ type: 'FETCH_ALL_PLAYERS' });
-    }, [dispatch]); // Add dispatch as a dependency
+    }, [dispatch]);
 
     return (
         <Autocomplete
