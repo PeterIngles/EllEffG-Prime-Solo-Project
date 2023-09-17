@@ -12,9 +12,28 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
 
 function Nav() {
   const user = useSelector((store) => store.user);
+
+  const svgCode = `
+ <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="800px" height="40px" viewBox="0 0 20 20" version="1.1">
+    
+    <title>swords [#101]</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Dribbble-Light-Preview" transform="translate(-340.000000, -7759.000000)" fill="white">
+            <g id="icons" transform="translate(56.000000, 160.000000)">
+                <polygon id="swords-[#101]" points="301.174002 7614.75989 303.9996 7617.58563 302.586801 7618.9995 299.761203 7616.17276 298.348404 7617.58563 296.934605 7616.17276 298.348404 7614.75989 294.0001 7609.98371 289.651796 7614.75989 291.064595 7616.17276 289.651796 7617.58563 288.238997 7616.17276 285.413398 7618.9995 283.9996 7617.58563 286.826197 7614.75989 285.413398 7613.34702 286.826197 7611.93415 288.238997 7613.34702 293.063895 7608.95554 283.9996 7598.9995 294.0001 7608.10322 303.9996 7598.9995 294.936304 7608.95554 299.761203 7613.34702 301.174002 7611.93415 302.586801 7613.34702"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>
+
+`;
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -82,6 +101,10 @@ function Nav() {
                   eLL-eFF-G
                 </Typography>
               </Link>
+              <SportsEsportsIcon/>
+              <div>
+      <div dangerouslySetInnerHTML={{ __html: svgCode }} />
+    </div>
             </Toolbar>
           </AppBar>
         </Box>
