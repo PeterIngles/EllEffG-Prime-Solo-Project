@@ -59,6 +59,7 @@ function ScheduleDayModal(prop) {
 
   console.log("RESPONSECHECK", responseCheck)
 
+
   let startHour = selectedStartTime.$H;
   let startMinute = String(selectedStartTime.$m).padStart(2, '0');
   let startAMPM = startHour >= 12 ? "PM" : "AM";

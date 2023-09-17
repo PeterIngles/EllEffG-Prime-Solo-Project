@@ -13,18 +13,23 @@ import Chip from '@mui/material/Chip';
 
 function CreateGroupPage() {
 
+ 
+
     const dispatch = useDispatch();
     const user = useSelector((store) => store.user);
     const games = useSelector((store) => store.games);
+    
 
     const history = useHistory();
+
+    
 
     
 
     const [groupName, setGroupName] = useState('');
     const [selectGames, setSelectGames] = useState([]);
     const [selectedPlayers, setSelectedPlayers] = useState([]);
-    const [options, setOptions] = useState(games.map((option) => ({ value: option.id, label: option.title })));
+    const [options, setOptions] = useState([]);
 
     
 
@@ -36,6 +41,12 @@ function CreateGroupPage() {
             },
         },
     });
+    useEffect(() => {
+      dispatch({ type: 'FETCH_GAMES' });
+      dispatch({ type: 'FETCH_PLAYERS' })
+      console.log("GAMES and PLAYERS", games)
+      setOptions(games.map((option) => ({ value: option.id, label: option.title })));
+  }, [games]);
 
 
     const handleSelectionChange = (event, values) => {
@@ -67,12 +78,6 @@ function CreateGroupPage() {
         )
         history.push('/user')
     }
-
-    useEffect(() => {
-        dispatch({ type: 'FETCH_GAMES' });
-        dispatch({ type: 'FETCH_PLAYERS' })
-        console.log("GAMES and PLAYERS", games)
-    }, []);
 
     return (
         <div style={{padding: '1em' }} id="create-group-form">

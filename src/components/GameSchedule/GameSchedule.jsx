@@ -44,7 +44,7 @@ function GameSchedule() {
     dispatch({ type: 'FETCH_USER_GAMES', payload: groupId });
     dispatch({ type: 'FETCH_GROUP_RESPONSES', payload: { groupId: groupId, gameId: gameId } });
     dispatch({ type: 'FETCH_ACTIVITY' });
-  }, []);
+  }, [responses]);
 
   const backToGroup = () => {
     history.push(`/group/${groupId}`);
