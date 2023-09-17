@@ -16,6 +16,7 @@ import { styled } from '@mui/material/styles';
 import ButtonBase from '@mui/material/ButtonBase';
 import Typography from '@mui/material/Typography';
 import UserSchedule from './UserSchedule';
+import Grid from '@mui/material/Grid'
 import "./UserPage.css"
 
 
@@ -39,7 +40,7 @@ function UserPage() {
 
   const [view, setView] = useState('groups');
 
-  
+
 
   const images = {
     url: '/images/GroupsBackground.jpeg',
@@ -127,13 +128,13 @@ function UserPage() {
   }
 
   const toUserSchedule = () => {
-    dispatch({type: 'FETCH_USER_ACTIVITY_RESPONSES', payload: user.id})
+    dispatch({ type: 'FETCH_USER_ACTIVITY_RESPONSES', payload: user.id })
     setView('userSchedule');
   }
 
   useEffect(() => {
     dispatch({ type: 'FETCH_GROUPS' });
-}, [groups]);
+  }, [groups]);
 
   return (
     <div>
@@ -174,21 +175,20 @@ function UserPage() {
           </nav>
         </Box>
       </div>
-      <div id="user-groups">
-        <Button></Button>
+      <div><Divider></Divider></div>
+      <div>
         {view === 'groups' ? (
-          <React.Fragment>
-            {group.map((group, index) => (
-              <div key={index}>
-                <Box sx={{ display: 'flex', flexWrap: 'wrap', minWidth: 300, width: '100%' }}>
-                  <ImageButton
-                    onClick={() => toGroupId(group.id)}
-                    focusRipple
-                    key={images.title}
-                    style={{
-                      width: images.width,
-                    }}
-                  >
+  <Grid container spacing={1}>
+    {group.map((group, index) => (
+       <Grid item spacing={3} key={index} xs={3}>
+        <ImageButton
+          onClick={() => toGroupId(group.id)}
+          focusRipple
+          key={images.title}
+          style={{
+            width: '100%',
+          }}
+        >
                     <ImageSrc style={{ backgroundImage: `url(${images.url})` }} />
                     <ImageBackdrop className="MuiImageBackdrop-root" />
                     <Image>
@@ -208,18 +208,17 @@ function UserPage() {
                       </Typography>
                     </Image>
                   </ImageButton>
-                </Box>
-              </div>
-            ))}
-          </React.Fragment>
+                  </Grid>
+    ))}
+  </Grid>
         ) : (
-          <UserSchedule filteredResponsesTue={tueFilteredResponses} 
-                    filteredResponsesWed={wedFilteredResponses}
-                    filteredResponsesThur={thurFilteredResponses}
-                    filteredResponsesFri={friFilteredResponses}
-                    filteredResponsesSat={satFilteredResponses}
-                    filteredResponsesSun={sunFilteredResponses}
-                    filteredResponsesMon={monFilteredResponses} />
+          <UserSchedule filteredResponsesTue={tueFilteredResponses}
+            filteredResponsesWed={wedFilteredResponses}
+            filteredResponsesThur={thurFilteredResponses}
+            filteredResponsesFri={friFilteredResponses}
+            filteredResponsesSat={satFilteredResponses}
+            filteredResponsesSun={sunFilteredResponses}
+            filteredResponsesMon={monFilteredResponses} />
         )}
       </div>
     </div>
