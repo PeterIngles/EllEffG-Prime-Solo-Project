@@ -1,8 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool');
+const {
+    rejectUnauthenticated,
+} = require('../modules/authentication-middleware');
 
-router.get('/:id/id', (req, res) => {
+router.get('/:id/id', rejectUnauthenticated, (req, res) => {
     const groupId = req.query.groupId; // Access the groupId from the query parameters
     const gameId = req.query.gameId;
     console.log("Inside GET /activity_responses/id req.query", req.query)
@@ -22,7 +25,7 @@ router.get('/:id/id', (req, res) => {
         })
 });
 
-router.get('/', (req, res) => {
+router.get('/', rejectUnauthenticated, (req, res) => {
     const userId = req.query[0];
     console.log("Inside GET user /activity_responses/ req.query", req.query[0])
     const queryParams = [userId];
@@ -50,7 +53,7 @@ WHERE
         })
 });
 
-router.post('/', (req, res) => {
+router.post('/', rejectUnauthenticated, (req, res) => {
     console.log("Inside POST /activity_responses");
     const userId = req.body.userId;
     const groupId = Number(req.body.groupId);
@@ -77,7 +80,7 @@ router.post('/', (req, res) => {
         });
 });
 
-router.delete('/', (req, res) => {
+router.delete('/', rejectUnauthenticated, (req, res) => {
     console.log("Inside DELETE /activity_responses", req.body);
     const userId = req.body.userId;
     const groupId = Number(req.body.groupId);
@@ -104,7 +107,7 @@ router.delete('/', (req, res) => {
         });
 });
 
-router.put('/', (req, res) => {
+router.put('/', rejectUnauthenticated, (req, res) => {
     console.log("Inside PUT /activity_responses", req.body);
     const userId = req.body.data.userId;
     const groupId = Number(req.body.data.groupId);

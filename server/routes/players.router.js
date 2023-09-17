@@ -1,8 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool')
+const {
+  rejectUnauthenticated,
+} = require('../modules/authentication-middleware');
 
-router.get('/', (req, res) => {
+router.get('/', rejectUnauthenticated, (req, res) => {
   console.log("Inside GET all /players");
   const query = `SELECT *
   FROM "user"
@@ -18,7 +21,7 @@ router.get('/', (req, res) => {
 
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id', rejectUnauthenticated, (req, res) => {
   console.log("Inside GET group /players", req.params.id);
   const queryParams = [Number(req.params.id)]
   const query = `SELECT username, user_id 
@@ -37,7 +40,7 @@ router.get('/:id', (req, res) => {
     });
 });
 
-router.post('/', (req, res) => {
+router.post('/', rejectUnauthenticated, (req, res) => {
   console.log("Inside POST /players")
   const groupId = req.body.groupId
   const userIds = req.body.selectedPlayers.map(players => players.value)
@@ -60,7 +63,7 @@ router.post('/', (req, res) => {
     })
 });
 
-router.delete('/', (req, res) => {
+router.delete('/', rejectUnauthenticated, (req, res) => {
   console.log("Inside DELETE /player", req.body)
   const groupId = req.body.groupId
   const userId = req.body.userId

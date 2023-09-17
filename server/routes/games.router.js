@@ -1,8 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool')
+const {
+  rejectUnauthenticated,
+} = require('../modules/authentication-middleware');
 
-router.get('/', (req, res) => {
+router.get('/', rejectUnauthenticated, (req, res) => {
   console.log("Inside GET all /games");
   const query = `SELECT *
   FROM "games"`;
@@ -17,7 +20,7 @@ router.get('/', (req, res) => {
 
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id', rejectUnauthenticated, (req, res) => {
   const userid = req.query[0]; // access the id from the request body
   console.log("Inside GET /games/id", userid);
   const queryParams = [userid];

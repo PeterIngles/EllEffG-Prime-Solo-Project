@@ -38,6 +38,7 @@ const postPlayers = () => {
         }
     }
     )
+    
 }
 
 console.log("Players", players)
@@ -51,9 +52,16 @@ console.log("Players", players)
             alignItems: 'baseline',
             flexDirection: 'row'
         }}>
-            <Typography>
+            <ListItem>
+                        <ListItemButton>
+                            <ListItemText>
+                            <Typography variant="h4">
             PLAYER LIST
         </Typography> 
+                            </ListItemText>
+                        </ListItemButton>
+                    </ListItem>
+            
 
             <Box sx={{
                 display: 'flex',
@@ -67,7 +75,7 @@ console.log("Players", players)
                 <AddPlayers onPlayersChange={handlePlayersChange} sx={{
                 alignItems: 'stretch'
             }}
-            ></AddPlayers><Button onClick={postPlayers}>ADD TO GROUP</Button>
+            ></AddPlayers>
                     <ListItem>
                         <ListItemButton>
                             <ListItemText>

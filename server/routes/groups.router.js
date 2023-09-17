@@ -1,8 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool')
+const {
+  rejectUnauthenticated,
+} = require('../modules/authentication-middleware');
 
-router.get('/:id', (req, res) => {
+router.get('/:id', rejectUnauthenticated, (req, res) => {
   const userid = req.query[0]; // access the id from the request body
   console.log("Inside GET /groups/id", userid);
   const queryParams = [userid];
@@ -22,7 +25,7 @@ router.get('/:id', (req, res) => {
 });
 
 // add a new group
-router.post('/', (req, res) => {
+router.post('/', rejectUnauthenticated, (req, res) => {
   console.log("Inside POST /groups")
   const groupName = req.body.groupName
   const gameIds = req.body.selectGames.map(game => game.value)
