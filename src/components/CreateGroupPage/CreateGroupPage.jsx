@@ -24,6 +24,8 @@ function CreateGroupPage() {
     const [groupName, setGroupName] = useState('');
     const [selectGames, setSelectGames] = useState([]);
     const [selectedPlayers, setSelectedPlayers] = useState([]);
+    const [options, setOptions] = useState(games.map((option) => ({ value: option.id, label: option.title })));
+
     
 
 
@@ -37,7 +39,12 @@ function CreateGroupPage() {
 
 
     const handleSelectionChange = (event, values) => {
-        setSelectGames(values)
+      setSelectGames(values);
+    
+      const filteredOptions = options.filter(
+        (option) => !values.find((selected) => selected.value === option.value)
+      );
+      setOptions(filteredOptions);
     };
 
     const handleGroupNameChange = (event) => {
@@ -89,18 +96,18 @@ function CreateGroupPage() {
                 }}
             />
             
-           <Autocomplete
-  multiple
-  value={selectGames}
-  onChange={handleSelectionChange}
-  id="search to add player"
-  disableClearable
-  sx={{
-    paddingTop: '1em'
-  }}
-  options={games.map((option) => ({ value: option.id, label: option.title }))}
-  getOptionLabel={(option) => option.label}
-  renderInput={(params) => (
+            <Autocomplete
+      multiple
+      value={selectGames}
+      onChange={handleSelectionChange}
+      id="search-to-add-player"
+      disableClearable
+      sx={{
+        paddingTop: '1em'
+      }}
+      options={options}
+      getOptionLabel={(option) => option.label}
+      renderInput={(params) =>  (
     <TextField
       {...params}
       label="Search games"

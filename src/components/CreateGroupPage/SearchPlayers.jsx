@@ -13,46 +13,50 @@ export function SearchPlayers({ onPlayersChange }) {
         setSelectPlayers(values);
         onPlayersChange(values);
     };
+    const filteredOptions = players.filter((option) => {
+        // Filter out the selected players
+        return !selectPlayers.some((selected) => selected.value === option.id);
+    });
 
     return (
         <Autocomplete
-            multiple
-            value={selectPlayers}
-            onChange={handleSelectionChange}
-            id="search-to-add-player"
-            disableClearable
-            options={players.map((option) => ({ value: option.id, label: option.username }))}
-            getOptionLabel={(option) => option.label}
-            renderInput={(params) => (
-                <TextField
-                    {...params}
-                    label="Search players"
-                    InputProps={{
-                        ...params.InputProps,
-                        type: 'search',
-                        style: { color: 'white' },
-                    }}
-                    sx={{
-                        '.MuiButtonBase-root-MuiChip-root': { backgroundColor: 'white' },
-                        '.MuiFormLabel-root': { color: '#ffffff' },
-                        '.MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
-                            borderColor: '#ffffff',
-                        },
-                        '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                            borderColor: 'white',
-                        },
-                    }}
+        multiple
+        value={selectPlayers}
+        onChange={handleSelectionChange}
+        id="search-to-add-player"
+        disableClearable
+        options={filteredOptions.map((option) => ({ value: option.id, label: option.username }))}
+        getOptionLabel={(option) => option.label}
+        renderInput={(params) => (
+            <TextField
+                {...params}
+                label="Search players"
+                InputProps={{
+                    ...params.InputProps,
+                    type: 'search',
+                    style: { color: 'white' },
+                }}
+                sx={{
+                    '.MuiButtonBase-root-MuiChip-root': { backgroundColor: 'white' },
+                    '.MuiFormLabel-root': { color: '#ffffff' },
+                    '.MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline': {
+                        borderColor: '#ffffff',
+                    },
+                    '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                        borderColor: 'white',
+                    },
+                }}
+            />
+        )}
+        renderTags={(value, getTagProps) =>
+            value.map((option, index) => (
+                <Chip
+                    label={option.label}
+                    {...getTagProps({ index })}
+                    sx={{ backgroundColor: 'rgb(64,60,61)', color: 'white' }}
                 />
-            )}
-            renderTags={(value, getTagProps) =>
-                value.map((option, index) => (
-                    <Chip
-                        label={option.label}
-                        {...getTagProps({ index })}
-                        sx={{ backgroundColor: 'rgb(64,60,61)', color: 'white' }}
-                    />
-                ))
-            }
-        />
+            ))
+        }
+    />
     );
 }
