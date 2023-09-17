@@ -20,9 +20,12 @@ function LandingPage() {
 
       <div className="grid">
         <div className="grid-col grid-col_8">
-        <img src="/images/eLL-eFF-G.png" alt="Description of the image" />
+        <img
+  src="/images/eLL-eFF-G.png"
+  alt="Description of the image"
+/>
         </div>
-        <div>
+        <div className="grid-col grid-col_3">
           <LoginForm />
 
           <center>
