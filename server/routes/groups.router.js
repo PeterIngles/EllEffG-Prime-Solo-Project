@@ -9,7 +9,8 @@ router.get('/:id', (req, res) => {
   const query = `SELECT "groups".*
   FROM "groups"
   JOIN "user_groups" ON "groups"."id" = "user_groups"."group_id"
-  WHERE "user_groups"."user_id" = $1;`;
+  WHERE "user_groups"."user_id" = $1
+  ORDER BY "group_name";`;
   pool.query(query, queryParams)
     .then(result => {
       res.send(result.rows);

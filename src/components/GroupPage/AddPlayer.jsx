@@ -18,6 +18,24 @@ export function AddPlayers({ onPlayersChange }) {
         dispatch({ type: 'FETCH_ALL_PLAYERS' });
     }, [dispatch]);
 
+    console.log("players", players, "allPlayers", allPlayers)
+
+    let searchResults = [];
+
+// Loop through allPlayers
+for(let allPlayer of allPlayers){
+  
+	//Look for player inside of group
+	let matchArray = players.filter(player => player.user_id == allPlayer.id);
+  
+	//if Player is not inside group, add to searchResults array
+  	if(matchArray.length == 0){
+      searchResults.push(allPlayer);
+    }
+}
+
+console.log("searchResults", searchResults)
+
     return (
         <Autocomplete
             multiple
@@ -25,7 +43,7 @@ export function AddPlayers({ onPlayersChange }) {
             onChange={handleSelectionChange}
             id="search-to-add-player"
             disableClearable
-            options={allPlayers.map((option) => ({ value: option.id, label: option.username }))}
+            options={searchResults.map((option) => ({ value: option.id, label: option.username }))}
             getOptionLabel={(option) => option.label}
             renderInput={(params) => (
                 <TextField

@@ -5,7 +5,8 @@ const pool = require('../modules/pool')
 router.get('/', (req, res) => {
   console.log("Inside GET all /players");
   const query = `SELECT *
-  FROM "user"`;
+  FROM "user"
+  ORDER BY username;`;
   pool.query(query)
     .then(result => {
       res.send(result.rows);
@@ -24,7 +25,8 @@ router.get('/:id', (req, res) => {
   FROM "user" 
   JOIN "user_groups" 
   ON "user".id = "user_groups".user_id 
-  WHERE "user_groups".group_id = $1;`;
+  WHERE "user_groups".group_id = $1
+  ORDER BY username;;`;
   pool.query(query, queryParams)
     .then(result => {
       res.send(result.rows);
