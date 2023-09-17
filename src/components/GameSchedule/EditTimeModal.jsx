@@ -62,8 +62,6 @@ function EditTimeModal(props) {
 
 
   const editTimeResponse = () => {
-    // console.log('Inside editTimeResponse');
-    // Dispatching edit action here
     dispatch({
       type: 'EDIT_RESPONSE',
       payload: {
@@ -102,18 +100,18 @@ function EditTimeModal(props) {
                 <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <TimePicker
-  label="Start time picker"
-  value={selectedStartTime}
-  onChange={setSelectedStartTime}
-  sx={{
-    '& .MuiSvgIcon-root': {
-      color: 'white',
-    },
-    '& .MuiDialogActions-root .MuiButton-text': {
-      color: 'white',
-    },
-  }}
-/>
+                      label="Start time picker"
+                      value={selectedStartTime}
+                      onChange={setSelectedStartTime}
+                      sx={{
+                        '& .MuiSvgIcon-root': {
+                          color: 'white',
+                        },
+                        '& .MuiDialogActions-root .MuiButton-text': {
+                          color: 'white',
+                        },
+                      }}
+                    />
                     <TimePicker
                       label="End time picker"
                       value={selectedEndTime}
