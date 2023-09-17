@@ -18,7 +18,7 @@ function Nav() {
   const user = useSelector((store) => store.user);
 
   const svgCode = `
- <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="800px" height="40px" viewBox="0 0 20 20" version="1.1">
+ <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="40px" height="40px" viewBox="0 0 20 20" version="1.1">
     
     <title>swords [#101]</title>
     <desc>Created with Sketch.</desc>

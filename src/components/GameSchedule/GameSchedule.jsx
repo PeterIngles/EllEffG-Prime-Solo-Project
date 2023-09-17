@@ -101,9 +101,15 @@ function GameSchedule() {
       </Box>
       <div id="user-groups">
       </div>
-  <TableContainer component={Paper} style={{ maxWidth: "80%" }}>
+  <TableContainer component={Paper} style={{ maxWidth: "100%" }}>
   <Table sx={{ minWidth: 650 }} aria-label="simple table">
-    <TableHead>
+  <TableHead>
+      <TableRow>
+        <TableCell colSpan={5} align="center">
+          <Avatar alt={game?.title} src={game?.icon} style={{ margin: '0 auto' }} />
+          <h2>{game?.title}</h2>
+        </TableCell>
+      </TableRow>
       <TableRow>
         <TableCell align="center">Date</TableCell>
         <TableCell align="center">Username</TableCell>
@@ -119,9 +125,9 @@ function GameSchedule() {
           return (
             <TableRow key={index}>
               <TableCell align="center">{day}</TableCell>
-              <TableCell align="center">
+         
                 <ScheduleDayModal align="center" id={{ date: day }} />
-              </TableCell>
+         
               <TableCell align="center"></TableCell>
               <TableCell align="center"></TableCell>
               <TableCell align="center">
@@ -134,9 +140,9 @@ function GameSchedule() {
         return [
           <TableRow key={`${index}-header`}>
             <TableCell align="center">{day}</TableCell>
-              <TableCell align="center">
+              
                 <ScheduleDayModal align="center" id={{ date: day }} />
-              </TableCell>
+              
               <TableCell align="center"></TableCell>
               <TableCell align="center"></TableCell>
               <TableCell align="center">

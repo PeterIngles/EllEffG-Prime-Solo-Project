@@ -49,7 +49,7 @@ function* editResponse(action){
   console.log('Inside editResponse SAGA, action.payload=', action.payload)
   try{
   yield axios.put('/api/activity_responses', {data: action.payload})
-  // yield put({type: 'FETCH_GROUP_RESPONSES', payload: action.payload})
+  yield put({type: 'FETCH_GROUP_RESPONSES', payload: action.payload})
   }
     catch{
       console.log('POST group activity_responses error');

@@ -110,8 +110,8 @@ function ScheduleDayModal(prop) {
       return (
 
         ///Renders if signed up
-        <div>
-          <TableCell>
+       
+        <TableCell align="center">
             <Button onClick={handleOpen} variant="outlined" color="error">REMOVE SIGN UP</Button>
             <Modal
               open={open}
@@ -132,13 +132,13 @@ function ScheduleDayModal(prop) {
               </Box>
             </Modal>
           </TableCell>
-        </div>
+      
       );
     } else {
       //Renders if you are not signed up
       return (
-        <div>
-          <TableCell>
+       
+          <TableCell align="center">
             <Button onClick={handleOpen} variant="contained">Sign Up</Button>
             <Modal
               open={open}
@@ -164,7 +164,7 @@ function ScheduleDayModal(prop) {
               </Box>
             </Modal>
           </TableCell>
-        </div>
+       
       );
     }
 
