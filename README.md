@@ -50,9 +50,9 @@ Furthermore this was the most complete practice with React, Node, Express, Redux
 
 This project was made entirely by myself, with the incredible support of the staff at Prime Digital Academy, my wonderful peers in the Iolite cohort and a special thanks to my teacher Key!
 
-My github and Linkedin are listed below.
+My github and Linkedin are listed below, I would love to collaborate and work to add features to this app, so please reach out if you'd like to assist!
 
-Thanks again for checking out our project!
+Thanks again for checking out our project and GAME ON!
 
 - Peter Ingles https://github.com/PeterIngles https://www.linkedin.com/in/peter-ingles/
 
